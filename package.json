@@ -1,0 +1,18 @@
+{
+  "name": "quale",
+  "version": "1.0.0",
+  "description": "TBA",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "install": "cd server && npm i && cd ../client && npm i",
+    "develop": "concurrently \"cd server && npm run watch\" \"cd client && npm start\"",
+    "build": "cd client && npm run build"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "concurrently": "^8.2.2"
+  }
+}
