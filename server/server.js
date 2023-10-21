@@ -1,16 +1,16 @@
+require('dotenv').config();
 const express = require('express');
 const db = require('./config/mongodb');
 const { ApolloServer } = require('@apollo/server');
 const { expressMiddleware } = require('@apollo/server/express4');
+const authExtension = require('./utils/auth');
 const path = require('path');
 
 //todo: smtp connect
 
-// SETUP express
 const server = express();
 const PORT = process.env.PORT || 3001;
 
-// SETUP apollo server
 const { typeDefs, resolvers } = require('./schemas');
 const apolloServer = new ApolloServer({
     typeDefs,
@@ -21,10 +21,11 @@ const startApolloServer = async () => {
 
     await apolloServer.start();
 
-    // SETUP server
     server.use(express.json());
     server.use(express.urlencoded({ extended: true }));
-    server.use('/setup/graphql', expressMiddleware(apolloServer));
+    server.use('/setup/graphql', expressMiddleware(apolloServer, {
+        context: authExtension,
+    }));
 
     if (process.env.NODE_ENV === 'production') {
         server.use(express.static(path.join(__dirname, '../client/dist')));
@@ -34,9 +35,6 @@ const startApolloServer = async () => {
         });
     }
 
-
-
-    // SETUP mongoDB
     db.once('open', () => {
         server.listen(PORT, () => {
             console.log(`API server running on port ${PORT}!`);
