@@ -24,7 +24,7 @@ const startApolloServer = async () => {
     // SETUP server
     server.use(express.json());
     server.use(express.urlencoded({ extended: true }));
-    server.use('/graphql', expressMiddleware(apolloServer));
+    server.use('/setup/graphql', expressMiddleware(apolloServer));
 
     if (process.env.NODE_ENV === 'production') {
         server.use(express.static(path.join(__dirname, '../client/dist')));
