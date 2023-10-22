@@ -4,6 +4,8 @@ const db = require('./config/mongodb');
 const { ApolloServer } = require('@apollo/server');
 const { expressMiddleware } = require('@apollo/server/express4');
 const authExtension = require('./utils/auth');
+const { createServer } = require('http');
+const { Server } = require('socket.io');
 const path = require('path');
 
 //todo: smtp connect
@@ -15,6 +17,14 @@ const { typeDefs, resolvers } = require('./schemas');
 const apolloServer = new ApolloServer({
     typeDefs,
     resolvers,
+});
+
+const httpServer = createServer(server);
+
+const io = new Server(httpServer, {
+    cors: {
+        origin: "http://localhost:3000"
+    }
 });
 
 const startApolloServer = async () => {
@@ -36,9 +46,30 @@ const startApolloServer = async () => {
     }
 
     db.once('open', () => {
-        server.listen(PORT, () => {
+
+        httpServer.listen(PORT, () => {
             console.log(`API server running on port ${PORT}!`);
         });
+
+        io.on('connection', (socket) => {
+
+            socket.on('create', (userInp_roomName) => {
+
+                const roomName = userInp_roomName;
+                console.log(`Room created: ${roomName}`);
+
+                socket.join(roomName);
+                io.to(roomName).emit('chat', `The room has been created: ${roomName}`);
+
+                socket.on('chat', (socket2) => {
+                    console.log(`Message sent: ${socket2}`);
+                    io.to(roomName).emit('chat', socket2);
+                });
+
+            });
+
+        });
+
     });
 
 }
