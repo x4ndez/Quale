@@ -1,3 +1,64 @@
 :root {}
 
-body {}
+body {
+
+    margin: 0;
+    font-family: calibri;
+
+}
+
+main {
+
+    width: 100vw;
+    min-height: 100vh;
+
+    background-color: grey;
+
+}
+
+#main-container {
+
+    width: 70%;
+
+    background-color: yellow;
+
+}
+
+aside {
+
+    width: 30%;
+
+    background-color: green;
+
+}
+
+.aside-box {
+
+    margin-bottom: 1rem;
+    padding: 2rem;
+    border-radius: 1rem;
+
+    color: white;
+    background-color: darkslateblue;
+
+}
+
+.flex-center-h,
+.flex-center-vh {
+
+    display: flex;
+    justify-content: center;
+
+}
+
+.flex-center-vh {
+
+    align-items: center;
+
+}
+
+.clickable {
+
+    cursor: pointer;
+
+}

@@ -10,7 +10,8 @@ import { Outlet } from 'react-router-dom'
 import { setContext } from '@apollo/client/link/context'
 import { socket } from '../config/socket'
 
-import { Header } from '../components/Header'
+import Header from '../components/Header'
+import Modal from '../components/Modal'
 
 const httpLink = createHttpLink({
   uri: '/setup/graphql',
@@ -73,8 +74,13 @@ function App() {
 
     <ApolloProvider client={client}>
 
+      <Modal />
+
       <Header />
-      <Outlet />
+
+      <main className='flex-center-h'>
+        <Outlet />
+      </main>
 
     </ApolloProvider>
 

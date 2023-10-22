@@ -4,8 +4,9 @@ import App from './App/index.jsx'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 
 // PAGE DEFINITIONS
-import ViewIndex from "./views/ViewIndex/index.jsx"
-import ViewError from "./views/ViewError/index.jsx"
+import ViewIndex from './views/ViewIndex'
+import ViewDashboard from "./views/ViewDashboard"
+import ViewError from "./views/ViewError"
 
 const router = createBrowserRouter([
   {
@@ -16,6 +17,10 @@ const router = createBrowserRouter([
       {
         index: true,
         element: <ViewIndex />,
+      },
+      {
+        path: '/dashboard',
+        element: <ViewDashboard />,
       },
     ],
   }
