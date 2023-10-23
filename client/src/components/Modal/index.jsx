@@ -1,12 +1,14 @@
 import './Modal.css'
 
 import CreateRoom from './CreateRoom'
+import Convo from './Convo'
 
 function Modal(props) {
 
     const handleModalContent = () => {
 
-        if (props.modalContent === 'CreateRoom') return <CreateRoom />;
+        if (props.modalContent === 'CreateRoom') return <CreateRoom {...props} />;
+        if (props.modalContent === 'Convo') return <Convo {...props} />;
         return '';
 
     }
