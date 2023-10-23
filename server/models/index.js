@@ -1,7 +1,11 @@
-const New = require("./newModel");
+const User = require('./Users');
+const Convo = require('./Convos');
+const Comment = require('./Comments');
 
 module.exports = {
 
-    New,
+    User,
+    Convo,
+    Comment,
 
 };
