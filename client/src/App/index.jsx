@@ -6,12 +6,13 @@ import {
   InMemoryCache,
   createHttpLink,
 } from '@apollo/client'
-import { Outlet } from 'react-router-dom'
 import { setContext } from '@apollo/client/link/context'
+import { Outlet } from 'react-router-dom'
 import { socket } from '../config/socket'
 
 import Header from '../components/Header'
 import Modal from '../components/Modal'
+import ViewDashboard from '../views/ViewDashboard'
 
 const httpLink = createHttpLink({
   uri: '/setup/graphql',
@@ -38,6 +39,9 @@ const client = new ApolloClient({
 function App() {
 
   const [isConnected, setIsConnected] = useState(socket.connected);
+  const [modalActive, setModalActive] = useState(false);
+  const [modalContent, setModalContent] = useState(0);
+
   console.log(socket.connected);
 
   useEffect(() => {
@@ -74,12 +78,23 @@ function App() {
 
     <ApolloProvider client={client}>
 
-      <Modal />
+      <Modal
+        modalActive={modalActive}
+        setModalActive={setModalActive}
+        modalContent={modalContent}
+        setModalContent={setModalContent}
+      />
 
       <Header />
 
       <main className='flex-center-h'>
-        <Outlet />
+
+        <Outlet
+          context={
+            [modalActive, setModalActive, modalContent, setModalContent]
+          }
+        />
+
       </main>
 
     </ApolloProvider>

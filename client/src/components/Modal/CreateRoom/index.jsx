@@ -5,7 +5,7 @@ function CreateRoom() {
 
             <form>
 
-                <label for='roomName'>Room Name:</label>
+                <label htmlFor='roomName'>Room Name:</label>
                 <input id='roomName' placeholder="Xande's Room" />
                 <input type='submit' id='btnCreateRoom' value='Create Room' />
 

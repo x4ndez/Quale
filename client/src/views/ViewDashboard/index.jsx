@@ -1,19 +1,11 @@
-import ReactDOM from 'react-dom/client'
-import Modal from '../../components/Modal'
+import { useOutletContext } from "react-router-dom";
 
-function ViewDashboard() {
+function ViewDashboard(props) {
 
-    function openModal() {
-
-        const modal = document.getElementById('modal');
-
-        modal.style.display = 'block';
-
-        setTimeout(() => {
-            modal.style.opacity = '1';
-        }, 50)
-
-    }
+    const [
+        modalActive, setModalActive,
+        modalContent, setModalContent
+    ] = useOutletContext();
 
     return (
         <>
@@ -25,7 +17,10 @@ function ViewDashboard() {
                     <div
                         id="btn-createroom"
                         className='aside-box clickable'
-                        onClick={openModal}>
+                        onClick={() => {
+                            setModalActive(true);
+                            setModalContent('CreateRoom');
+                        }}>
                         Create Room
                     </div>
 

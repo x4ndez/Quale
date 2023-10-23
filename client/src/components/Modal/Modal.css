@@ -5,9 +5,6 @@
     position: absolute;
     z-index: 10;
 
-    display: none;
-    opacity: 0;
-
     transition: opacity 0.5s;
 
 }
@@ -46,5 +43,19 @@
 #modal-exit:hover {
 
     transform: scale(1.2);
+
+}
+
+.modal-active {
+
+    display: block;
+    opacity: 1;
+
+}
+
+.modal-inactive {
+
+    display: none;
+    opacity: 0;
 
 }

@@ -1,40 +1,32 @@
 import './Modal.css'
 
 import CreateRoom from './CreateRoom'
-import Convo from './Convo'
 
-function Modal() {
+function Modal(props) {
 
-    function closeModal() {
+    const handleModalContent = () => {
 
-        const modal = document.getElementById('modal');
-
-        modal.style.opacity = '0';
-
-        setTimeout(() => {
-            modal.style.display = 'none';
-        }, 1000)
+        if (props.modalContent === 'CreateRoom') return <CreateRoom />;
+        return '';
 
     }
 
     return (
         <>
 
-            <div id='modal'>
+            <div id='modal' className={props.modalActive ? 'modal-active' : 'modal-inactive'}>
 
                 <div id='modal-blockout' className='flex-center-vh'>
 
                     <div id='modal-container' className='flex-center-vh'>
 
-                        <div id='modal-exit' className='clickable' onClick={closeModal}>X</div>
+                        <div id='modal-exit' className='clickable' onClick={() => {
+                            props.setModalActive(false);
+                            props.setModalContent('');
+                        }}>X</div>
 
-                        <form>
+                        {handleModalContent()}
 
-                            <label for='roomName'>Room Name:</label>
-                            <input id='roomName' placeholder="Xande's Room" />
-                            <input type='submit' id='btnCreateRoom' value='Create Room' />
-
-                        </form>
 
                     </div>
 
