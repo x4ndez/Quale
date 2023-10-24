@@ -2,6 +2,8 @@ import './Modal.css'
 
 import CreateRoom from './CreateRoom'
 import Convo from './Convo'
+import Login from './Login'
+import Signup from './Signup'
 
 function Modal(props) {
 
@@ -9,6 +11,8 @@ function Modal(props) {
 
         if (props.modalContent === 'CreateRoom') return <CreateRoom {...props} />;
         if (props.modalContent === 'Convo') return <Convo {...props} />;
+        if (props.modalContent === 'Login') return <Login {...props} />;
+        if (props.modalContent === 'Signup') return <Signup {...props} />;
         return '';
 
     }

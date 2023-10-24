@@ -1,13 +1,20 @@
 import { Link } from 'react-router-dom'
 
-function Nav() {
+function Nav(props) {
 
     return (
         <>
             <nav>
 
-                <Link to='/login'>Login</Link> /
-                <Link to='/signup'>Signup</Link> / <Link to='/dashboard'>Dashboard</Link>
+                <a onClick={() => {
+                    props.setModalActive(1);
+                    props.setModalContent('Login');
+                }}>Login</a> /
+                <a onClick={() => {
+                    props.setModalActive(1);
+                    props.setModalContent('Signup');
+                }}>Signup</a> /
+                <Link to='/dashboard'>Dashboard</Link>
 
             </nav>
         </>

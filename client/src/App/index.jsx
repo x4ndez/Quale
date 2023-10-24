@@ -85,7 +85,12 @@ function App() {
         setModalContent={setModalContent}
       />
 
-      <Header />
+      <Header
+        modalActive={modalActive}
+        setModalActive={setModalActive}
+        modalContent={modalContent}
+        setModalContent={setModalContent}
+      />
 
       <main className='flex-center-h'>
 
