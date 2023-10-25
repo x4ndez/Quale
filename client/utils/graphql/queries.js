@@ -17,3 +17,23 @@ query convosRecent {
     }
   }
 `;
+
+export const GET_CONVO = gql`
+query GET_CONVO($convoId: String!) {
+    convoById(convoId: $convoId) {
+      _id
+      roomName
+      comments {
+        _id
+        comment
+        createdBy {
+          _id
+          username
+        }
+      }
+      createdBy
+      createdAt
+    }
+  }
+`;
+

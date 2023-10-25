@@ -9,10 +9,10 @@ function Modal(props) {
 
     const handleModalContent = () => {
 
-        if (props.modalContent === 'CreateRoom') return <CreateRoom {...props} />;
-        if (props.modalContent === 'Convo') return <Convo {...props} />;
-        if (props.modalContent === 'Login') return <Login {...props} />;
-        if (props.modalContent === 'Signup') return <Signup {...props} />;
+        if (props.modalContent.type === 'CreateRoom') return <CreateRoom {...props} />;
+        if (props.modalContent.type === 'Convo') return <Convo {...props} />;
+        if (props.modalContent.type === 'Login') return <Login {...props} />;
+        if (props.modalContent.type === 'Signup') return <Signup {...props} />;
         return '';
 
     }

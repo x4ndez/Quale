@@ -8,11 +8,11 @@ function Nav(props) {
 
                 <a onClick={() => {
                     props.setModalActive(1);
-                    props.setModalContent('Login');
+                    props.setModalContent({ type: 'Login' });
                 }}>Login</a> /
                 <a onClick={() => {
                     props.setModalActive(1);
-                    props.setModalContent('Signup');
+                    props.setModalContent({ type: 'Signup' });
                 }}>Signup</a> /
                 <Link to='/dashboard'>Dashboard</Link>
 

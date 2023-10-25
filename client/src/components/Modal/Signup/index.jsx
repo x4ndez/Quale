@@ -35,7 +35,7 @@ function Signup(props) {
             }
         });
 
-        return props.setModalContent('Login');
+        return props.setModalContent({ type: 'Login' });
 
     }
 

@@ -41,7 +41,7 @@ function ViewDashboard(props) {
                             className='aside-box clickable'
                             onClick={() => {
                                 setModalActive(true);
-                                setModalContent('CreateRoom');
+                                setModalContent({ type: 'CreateRoom' });
                             }}>
                             Create Room
                         </div>

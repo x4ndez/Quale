@@ -4,6 +4,7 @@ type Query {
     users: [User]!
     userByUsername(username: String!): User
     convosRecent: [Convo]
+    convoById(convoId: String!): Convo
 }
 
 type Mutation {

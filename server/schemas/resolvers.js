@@ -13,7 +13,10 @@ const resolvers = {
         },
         // return 5 most recent conversations: Used for the dashboard recent convos display.
         convosRecent: async () => {
-            return await Convo.find({}).sort({ createdAt: -1 }).limit(5)
+            return await Convo.find({}).sort({ createdAt: -1 }).limit(5);
+        },
+        convoById: async (parent, { convoId }) => {
+            return await Convo.findById(convoId).populate('comments');
         },
     },
 

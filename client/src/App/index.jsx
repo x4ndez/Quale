@@ -40,7 +40,7 @@ function App() {
 
   const [isConnected, setIsConnected] = useState(socket.connected);
   const [modalActive, setModalActive] = useState(false);
-  const [modalContent, setModalContent] = useState(0);
+  const [modalContent, setModalContent] = useState({ type: '', feedback: {} });
 
   console.log(socket.connected);
 
