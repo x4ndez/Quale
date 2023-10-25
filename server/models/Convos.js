@@ -1,4 +1,5 @@
 const { Schema, model } = require("mongoose");
+const commentSchema = require('./Comments');
 
 //   Table convos {
 //     _id ID
@@ -15,12 +16,7 @@ const convoSchema = new Schema(
         roomName: {
             type: String,
         },
-        comments: [
-            {
-                type: Schema.Types.ObjectId,
-                ref: 'comment',
-            },
-        ],
+        comments: [commentSchema],
         createdBy: {
             type: Schema.Types.ObjectId,
             ref: 'user',
