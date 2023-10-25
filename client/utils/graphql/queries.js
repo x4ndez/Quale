@@ -1,3 +1,19 @@
 import { gql } from '@apollo/client'
 
-export const QUERY_NAME = gql``;
+export const GET_RECENT_CONVOS = gql`
+query convosRecent {
+    convosRecent {
+      _id
+      roomName
+      createdBy
+      createdAt
+      comments {
+        _id
+        comment
+        createdBy {
+          _id
+        }
+      }
+    }
+  }
+`;

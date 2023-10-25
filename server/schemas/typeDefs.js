@@ -3,6 +3,7 @@ const typeDefs = `
 type Query {
     users: [User]!
     userByUsername(username: String!): User
+    convosRecent: [Convo]
 }
 
 type Mutation {
@@ -29,6 +30,7 @@ type Convo {
     roomName: String
     comments: [Comment]
     createdBy: ID
+    createdAt: String
 }
 
 type Comment {

@@ -1,8 +1,17 @@
-function ChatPreview() {
+import './ChatPreview.css'
+
+function ChatPreview(props) {
 
     return (
         <>
-            ChatPreview
+            <div
+                className='previewBox clickable flex-center-vh'
+                onClick={() => {
+                    props.setModalActive(1);
+                    props.setModalContent('Convo');
+                }}>
+                {props.convoData.roomName}
+            </div>
         </>
     )
 }

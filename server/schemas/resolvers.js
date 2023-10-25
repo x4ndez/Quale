@@ -4,11 +4,16 @@ const { signToken, AuthenticationError } = require('../utils/auth');
 const resolvers = {
 
     Query: {
+        // return all users
         users: async () => {
             return await User.find().populate('convos');
         },
         userByUsername: async (parent, { username }) => {
             return await User.findOne({ username: username });
+        },
+        // return 5 most recent conversations: Used for the dashboard recent convos display.
+        convosRecent: async () => {
+            return await Convo.find({}).sort({ createdAt: -1 }).limit(5)
         },
     },
 

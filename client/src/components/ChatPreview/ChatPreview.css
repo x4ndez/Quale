@@ -1,0 +1,16 @@
+.previewBox {
+
+    width: 100%;
+    height: 5rem;
+    border-radius: 1rem;
+
+    background-color: orange;
+    margin-bottom: 1rem;
+
+}
+
+.previewBox:hover {
+
+    background-color: orangered;
+
+}
