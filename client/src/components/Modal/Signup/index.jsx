@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { useMutation } from '@apollo/client';
 import { ADD_USER } from '../../../../utils/graphql/mutations'
 
@@ -8,7 +8,11 @@ function Signup(props) {
     const [passwordVal, setPasswordVal] = useState('');
     const [emailVal, setEmailVal] = useState('');
 
-    const [addUser, { data, loading, error }] = useMutation(ADD_USER)
+    const [addUser, { data, loading, error }] = useMutation(ADD_USER);
+
+    useEffect(() => {
+        console.log(data);
+    }, [data]);
 
     const handleFormInput = (e) => {
 

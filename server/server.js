@@ -3,7 +3,7 @@ const express = require('express');
 const db = require('./config/mongodb');
 const { ApolloServer } = require('@apollo/server');
 const { expressMiddleware } = require('@apollo/server/express4');
-const authExtension = require('./utils/auth');
+const { authExtension } = require('./utils/auth');
 const { createServer } = require('http');
 const { Server } = require('socket.io');
 const path = require('path');
@@ -33,10 +33,10 @@ const startApolloServer = async () => {
 
     server.use(express.json());
     server.use(express.urlencoded({ extended: true }));
-    server.use('/setup/graphql', expressMiddleware(apolloServer));
-    // server.use('/setup/graphql', expressMiddleware(apolloServer, {
-    //     context: authExtension,
-    // }));
+    // server.use('/setup/graphql', expressMiddleware(apolloServer));
+    server.use('/setup/graphql', expressMiddleware(apolloServer, {
+        context: authExtension,
+    }));
 
     if (process.env.NODE_ENV === 'production') {
         server.use(express.static(path.join(__dirname, '../client/dist')));

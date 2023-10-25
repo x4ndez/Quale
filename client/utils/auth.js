@@ -3,7 +3,18 @@ import decode from 'jwt-decode';
 class AuthService {
     // get user data from JSON web token by decoding it
     getProfile() {
-        return decode(this.getToken());
+
+        try {
+
+            return decode(this.getToken());
+
+        } catch (err) {
+
+            return undefined;
+
+        }
+
+
     }
 
     // return `true` or `false` if token exists (does not verify if it's expired yet)
@@ -20,7 +31,7 @@ class AuthService {
     login(idToken) {
         // Saves user token to localStorage and reloads the application for logged in status to take effect
         localStorage.setItem('id_token', idToken);
-        window.location.assign('/');
+        // window.location.assign('/');
     }
 
     logout() {
