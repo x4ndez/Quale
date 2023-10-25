@@ -10,34 +10,14 @@ function Convo(props) {
     // console.log(Auth.getProfile().data._id);
 
     const [msgInputVal, setMsgInputVal] = useState('');
-    const [queryData, setQueryData] = useState();
     const [chatLog, setChatLog] = useState([]);
+    const [isConnected, setIsConnected] = useState(socket.connected);
 
     const { loading, error, data } = useQuery(GET_CONVO, {
         variables: {
             convoId: props.modalContent.feedback.convoId,
         }
     });
-
-    // useEffect(() => {
-
-    //     socket.connect();
-
-    //     socket.emit('create', 'PLACEHOLDER');
-
-    //     socket.on('chat', (socket) => {
-    //         setChatLog([...chatLog, socket]);
-    //     });
-
-    //     return () => {
-    //         socket.disconnect();
-    //     }
-
-    // }, [data]);
-
-
-
-    const [isConnected, setIsConnected] = useState(socket.connected);
 
     useEffect(() => {
 
@@ -50,7 +30,7 @@ function Convo(props) {
         }
 
         function onChatEvent(value) {
-            setChatLog([...chatLog, value]);
+            setChatLog(chatLog => [...chatLog, value]);
         }
 
         socket.on('connect', onConnect);
@@ -65,6 +45,13 @@ function Convo(props) {
             socket.off('chat', onChatEvent);
         };
     }, []);
+
+    useEffect(() => {
+
+        //add comments from data to initial chatlog
+        // setChatLog(data.convoById.comments);
+
+    }, [data]);
 
     useEffect(() => {
 
@@ -85,6 +72,7 @@ function Convo(props) {
 
         const comment = {
             userId: Auth.getProfile().data._id,
+            username: Auth.getProfile().data.username,
             commentContent: msgInputVal,
         };
 
@@ -108,10 +96,16 @@ function Convo(props) {
 
                         <div className='convo-main'>
 
-                            {data.convoById.comments.length ? 'x' : 'Start the conversation!'}
-                            {/* {chatLog.map((comment) => {
-                                    (<div>{comment.commentContent}</div>)
-                                })} */}
+                            {data.convoById.comments.length
+                                //add initial comments here
+                                ? 'x'
+                                : 'Start the conversation!'
+                            }
+
+                            {chatLog.map((comment) =>
+                                (<ul>{comment.username} said: {comment.commentContent}</ul>)
+                            )}
+
                         </div>
 
                         <form className='convo-input'
