@@ -1,11 +1,11 @@
-const { User } = require('../models');
+const { User, Convo } = require('../models');
 const { signToken, AuthenticationError } = require('../utils/auth');
 
 const resolvers = {
 
     Query: {
         users: async () => {
-            return await User.find();
+            return await User.find().populate('convos');
         },
         userByUsername: async (parent, { username }) => {
             return await User.findOne({ username: username });
@@ -54,6 +54,25 @@ const resolvers = {
                 console.log('wrong password');
                 throw AuthenticationError;
             }
+
+        },
+
+        addConvo: async (parent, { roomName, createdBy }) => {
+
+            const newConvo = {
+                roomName: roomName,
+                createdBy: createdBy,
+            }
+
+            const convo = await Convo.create(newConvo);
+
+            await User.findOneAndUpdate({ _id: convo.createdBy }, {
+                $addToSet: { convos: convo._id }
+            }, {
+                new: true,
+            });
+
+            return convo;
 
         }
 

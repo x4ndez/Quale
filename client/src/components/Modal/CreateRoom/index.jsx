@@ -1,8 +1,15 @@
 import { useState } from 'react'
+import { useMutation } from '@apollo/client'
+import { ADD_CONVO } from '../../../../utils/graphql/mutations'
+import Auth from '../../../../utils/auth'
 
 function CreateRoom(props) {
 
     const [roomNameVal, setRoomNameVal] = useState('');
+
+    // console.log(Auth.getProfile().data._id);
+
+    const [addConvo, { data, loading, error }] = useMutation(ADD_CONVO);
 
     const handleFormInput = (e) => {
 
@@ -14,7 +21,15 @@ function CreateRoom(props) {
     const handleFormSubmit = (e) => {
 
         e.preventDefault();
-        return props.setModalContent('Convo');
+
+        addConvo({
+            variables: {
+                roomName: roomNameVal,
+                createdBy: Auth.getProfile().data._id,
+            }
+        });
+
+        props.setModalActive(0);
 
     }
 

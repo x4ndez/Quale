@@ -12,7 +12,7 @@ const { Schema, model } = require("mongoose");
 const convoSchema = new Schema(
 
     {
-        nickname: {
+        roomName: {
             type: String,
         },
         comments: [
