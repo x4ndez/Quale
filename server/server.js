@@ -52,7 +52,7 @@ const startApolloServer = async () => {
             console.log(`API server running on port ${PORT}!`);
         });
 
-        io.on('connection', (socket) => {
+        io.on('connect', (socket) => {
 
             socket.on('create', (userInp_roomName) => {
 
@@ -60,7 +60,7 @@ const startApolloServer = async () => {
                 console.log(`Room created: ${roomName}`);
 
                 socket.join(roomName);
-                io.to(roomName).emit('chat', `The room has been created: ${roomName}`);
+                // io.to(roomName).emit('chat', `The room has been created: ${roomName}`);
 
                 socket.on('chat', (socket2) => {
                     console.log(`Message sent: ${socket2}`);

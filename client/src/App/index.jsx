@@ -38,41 +38,11 @@ const client = new ApolloClient({
 
 function App() {
 
-  const [isConnected, setIsConnected] = useState(socket.connected);
+
   const [modalActive, setModalActive] = useState(false);
   const [modalContent, setModalContent] = useState({ type: '', feedback: {} });
 
-  console.log(socket.connected);
-
-  useEffect(() => {
-
-    function onConnect() {
-      setIsConnected(true);
-    }
-
-    function onDisconnect() {
-      setIsConnected(false);
-    }
-
-    socket.on('connect', onConnect);
-    socket.on('disconnect', onDisconnect);
-
-    socket.emit('create', 'TheBoiz');
-    socket.emit('chat', 'message01');
-
-    socket.on('chat', (socket) => {
-      console.log(socket);
-    });
-
-    // socket.join('room_01');
-
-    // socket.to('room_01').emit('lolwtf');
-
-    return () => {
-      socket.off('connect', onConnect);
-      //   socket.off('disconnect', onDisconnect);
-    };
-  }, []);
+  
 
   return (
 
