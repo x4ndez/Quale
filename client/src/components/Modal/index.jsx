@@ -1,5 +1,7 @@
 import './Modal.css'
 
+import { socket } from '../../config/socket'
+
 import CreateRoom from './CreateRoom'
 import Convo from './Convo'
 import Login from './Login'
@@ -27,6 +29,7 @@ function Modal(props) {
                     <div id='modal-container' className='flex-center-vh'>
 
                         <div id='modal-exit' className='clickable' onClick={() => {
+                            socket.disconnect();
                             props.setModalActive(false);
                             props.setModalContent('');
                         }}>X</div>

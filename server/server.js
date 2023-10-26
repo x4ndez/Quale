@@ -54,16 +54,13 @@ const startApolloServer = async () => {
 
         io.on('connect', (socket) => {
 
-            socket.on('create', (userInp_roomName) => {
+            socket.on('open', (userInp_roomName) => {
 
                 const roomName = userInp_roomName;
-                console.log(`Room created: ${roomName}`);
 
                 socket.join(roomName);
-                // io.to(roomName).emit('chat', `The room has been created: ${roomName}`);
 
                 socket.on('chat', (socket2) => {
-                    console.log(`Message sent: ${socket2}`);
                     io.to(roomName).emit('chat', socket2);
                 });
 

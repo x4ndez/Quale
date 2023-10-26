@@ -25,8 +25,6 @@ function Convo(props) {
 
     useEffect(() => {
 
-        console.log(loading);
-
         function onConnect() {
             setIsConnected(true);
         }
@@ -52,13 +50,11 @@ function Convo(props) {
     }, []);
 
     useEffect(() => {
+        if (!data) return;
 
-        if (!loading) {
-            socket.emit('create', data.convoById.roomName);
-            setChatLog([...data.convoById.comments]);
-        }
-
-    }, [loading]);
+        socket.emit('open', data.convoById.roomName);
+        setChatLog([...data.convoById.comments]);
+    }, [data]);
 
     useEffect(() => {
 

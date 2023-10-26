@@ -25,6 +25,9 @@ const resolvers = {
 
             //PROCESS USER DATA HERE
 
+            //USERNAME VALIDATION
+            
+
             const newUserData = {
                 username: username,
                 password: password,
