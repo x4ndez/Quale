@@ -11,6 +11,7 @@ type Mutation {
     addUser(username: String!, password: String!, email: String!): Auth
     login(username: String!, password: String!): Auth
     addConvo(roomName: String!, createdBy: ID!): Convo
+    addCommentToConvo(convoId: ID!, commentContent: String, createdBy: ID!): Convo
 }
 
 type User {
@@ -30,7 +31,7 @@ type Convo {
     _id: ID
     roomName: String
     comments: [Comment]
-    createdBy: ID
+    createdBy: User
     createdAt: String
 }
 
@@ -38,6 +39,7 @@ type Comment {
     _id: ID
     comment: String
     createdBy: User
+    createdAt: String
 }
 
 `;

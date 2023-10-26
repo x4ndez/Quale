@@ -35,6 +35,29 @@ export const ADD_CONVO = gql`
   }
   `;
 
+export const ADD_COMMENT = gql`
+  mutation ADD_COMMENT($convoId: ID!, $commentContent: String!, $createdBy: ID!) {
+    addCommentToConvo(convoId: $convoId, commentContent: $commentContent, createdBy: $createdBy) {
+      _id
+      roomName
+      comments {
+        _id
+        comment
+        createdAt
+        createdBy {
+          _id
+          username
+        }
+      }
+      createdBy {
+        _id
+        username
+      }
+      createdAt
+    }
+  }
+  `;
+
 
 
 

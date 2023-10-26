@@ -5,7 +5,10 @@ query convosRecent {
     convosRecent {
       _id
       roomName
-      createdBy
+      createdBy {
+        _id
+        username
+      }
       createdAt
       comments {
         _id
@@ -20,20 +23,23 @@ query convosRecent {
 
 export const GET_CONVO = gql`
 query GET_CONVO($convoId: String!) {
-    convoById(convoId: $convoId) {
+  convoById(convoId: $convoId) {
+    _id
+    roomName
+    comments {
       _id
-      roomName
-      comments {
+      comment
+      createdBy {
         _id
-        comment
-        createdBy {
-          _id
-          username
-        }
+        username
       }
-      createdBy
-      createdAt
     }
+    createdBy {
+      _id
+      username
+    }
+    createdAt
   }
+}
 `;
 

@@ -82,7 +82,22 @@ const resolvers = {
 
             return convo;
 
-        }
+        },
+
+        addCommentToConvo: async (parent, { convoId, commentContent, createdBy }) => {
+
+            const newComment = {
+                comment: commentContent,
+                createdBy: createdBy,
+            }
+
+            return await Convo.findByIdAndUpdate(convoId, {
+                $addToSet: { comments: newComment }
+            }, {
+                returnDocument: 'after',
+            });
+
+        },
 
     }
 
