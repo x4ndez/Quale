@@ -30,7 +30,9 @@ export const ADD_CONVO = gql`
   mutation AddConvo($roomName: String!, $createdBy: ID!) {
     addConvo(roomName: $roomName, createdBy: $createdBy) {
       roomName
-      createdBy
+      createdBy {
+        _id
+      }
     }
   }
   `;

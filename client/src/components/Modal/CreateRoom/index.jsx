@@ -31,6 +31,8 @@ function CreateRoom(props) {
 
         props.setModalActive(0);
 
+        window.location.reload(false);
+
     }
 
     return (
