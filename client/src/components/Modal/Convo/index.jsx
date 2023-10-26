@@ -110,15 +110,16 @@ function Convo(props) {
 
                         <div className='convo-main'>
 
-                            {/* {data.convoById.comments
-                                //add initial comments here
-                                ? 'x'
+                            {data.convoById.comments.length > 0
+                                ? <>
+                                    {chatLog.map((comment, i) =>
+                                        (<ul key={i}>{comment.createdBy.username} said: {comment.comment}</ul>)
+                                    )}
+                                </>
                                 : 'Start the conversation!'
-                            } */}
+                            }
 
-                            {chatLog.map((comment, i) =>
-                                (<ul key={i}>{comment.createdBy._id} said: {comment.comment}</ul>)
-                            )}
+
 
                         </div>
 

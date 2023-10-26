@@ -16,17 +16,17 @@ const resolvers = {
             return await Convo.find({}).sort({ createdAt: -1 }).limit(5);
         },
         convoById: async (parent, { convoId }) => {
-            return await Convo.findById(convoId).populate('comments');
+            return await Convo.findById(convoId);
+            // .populate('comments.createdBy');
         },
     },
-
     Mutation: {
         addUser: async (parent, { username, password, email }) => {
 
             //PROCESS USER DATA HERE
 
             //USERNAME VALIDATION
-            
+
 
             const newUserData = {
                 username: username,
@@ -102,6 +102,20 @@ const resolvers = {
 
         },
 
+    },
+
+    Convo: {
+        createdBy: async (parent) => {
+            const user = await User.findById(parent.createdBy);
+            return user;
+        }
+    },
+
+    Comment: {
+        createdBy: async (parent) => {
+            const user = await User.findById(parent.createdBy);
+            return user;
+        }
     }
 
 };
