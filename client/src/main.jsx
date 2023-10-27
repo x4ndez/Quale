@@ -7,6 +7,7 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import ViewIndex from './views/ViewIndex'
 import ViewDashboard from "./views/ViewDashboard"
 import ViewError from "./views/ViewError"
+import ViewAccount from "./views/ViewAccount"
 
 const router = createBrowserRouter([
   {
@@ -21,6 +22,10 @@ const router = createBrowserRouter([
       {
         path: '/dashboard',
         element: <ViewDashboard />,
+      },
+      {
+        path: '/account',
+        element: <ViewAccount />,
       },
     ],
   }

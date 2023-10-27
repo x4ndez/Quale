@@ -14,7 +14,8 @@ function Nav(props) {
                     props.setModalActive(1);
                     props.setModalContent({ type: 'Signup' });
                 }}>Signup</a> /
-                <Link to='/dashboard'>Dashboard</Link>
+                <Link to='/dashboard'>Dashboard</Link> / 
+                <Link to='/account'>Account</Link>
 
             </nav>
         </>

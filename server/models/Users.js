@@ -1,4 +1,5 @@
 const { Schema, model } = require("mongoose");
+const infoSchema = require('./Info');
 
 // Table users {
 //     _id ID
@@ -41,6 +42,7 @@ const userSchema = new Schema(
             type: Date,
             default: Date.now,
         },
+        info: infoSchema
     },
     {
 

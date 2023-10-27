@@ -62,3 +62,23 @@ aside {
     cursor: pointer;
 
 }
+
+.interest {
+
+    background-color: rgba(0, 0, 0, 0.3);
+    display: inline-block;
+    margin: 0.2rem;
+    padding: 0.2rem;
+    border-radius: 0.2rem;
+    width: fit-content;
+    height: fit-content;
+
+    transition: background-color 0.5s;
+
+}
+
+.interest:hover {
+
+    background-color: rgba(0, 0, 0, 0.4);
+
+}
