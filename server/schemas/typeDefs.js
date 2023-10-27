@@ -2,7 +2,7 @@ const typeDefs = `
 
 type Query {
     users: [User]!
-    userByUsername(username: String!): User
+    userById(userId: ID!): User
     convosRecent: [Convo]
     convoById(convoId: String!): Convo
 }
@@ -12,6 +12,8 @@ type Mutation {
     login(username: String!, password: String!): Auth
     addConvo(roomName: String!, createdBy: ID!): Convo
     addCommentToConvo(convoId: ID!, commentContent: String, createdBy: ID!): Convo
+    updateInfoById(userId: ID!, name: String! phone: String!, city: String!, country: String!): User
+    updateInterestsById(userId: ID!, interests: [String]): User
 }
 
 type User {
@@ -20,6 +22,15 @@ type User {
     password: String
     email: String
     convos: [Convo]
+    info: Info
+    interests: [String]
+}
+
+type Info {
+    name: String
+    phone: String
+    city: String
+    country: String
 }
 
 type Auth {

@@ -8,8 +8,8 @@ const resolvers = {
         users: async () => {
             return await User.find().populate('convos');
         },
-        userByUsername: async (parent, { username }) => {
-            return await User.findOne({ username: username });
+        userById: async (parent, { userId }) => {
+            return await User.findById(userId);
         },
         // return 5 most recent conversations: Used for the dashboard recent convos display.
         convosRecent: async () => {
@@ -101,6 +101,37 @@ const resolvers = {
             });
 
         },
+
+        updateInfoById: async (parent, { userId, name, phone, city, country }) => {
+
+            const updateInfo = {
+                name: name,
+                phone: phone,
+                city: city,
+                country: country,
+            }
+
+            console.log({ info: updateInfo });
+
+            return await User.findByIdAndUpdate(userId, { info: updateInfo }, {
+                returnDocument: 'after',
+            });
+
+        },
+
+        updateInterestsById: async (parent, { userId, interests }) => {
+
+            const updateInterests = interests;
+
+            return await User.findByIdAndUpdate(userId, { interests: updateInterests }, {
+                returnDocument: 'after',
+            });
+
+        },
+
+        //ADD FRIEND
+
+        //DELETE FRIEND
 
     },
 

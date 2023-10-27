@@ -5,17 +5,20 @@ const infoSchema = new Schema(
     {
         name: {
             type: String,
+            default: '',
         },
         phone: {
             type: String,
+            default: '',
         },
         city: {
             type: String,
+            default: '',
         },
         country: {
             type: String,
+            default: '',
         },
-        interests: [],
 
     },
     {
@@ -28,4 +31,4 @@ const infoSchema = new Schema(
     }
 );
 
-module.exports = infoSchema;
+module.exports = { infoSchema };

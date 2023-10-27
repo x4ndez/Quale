@@ -60,6 +60,36 @@ export const ADD_COMMENT = gql`
   }
   `;
 
+export const UPDATE_INFO = gql`
+mutation UpdateInfoById($userId: ID!, $name: String!, $phone: String!, $city: String!, $country: String!) {
+  updateInfoById(userId: $userId, name: $name, phone: $phone, city: $city, country: $country) {
+    _id
+    username
+    info {
+      name
+      phone
+      city
+      country
+    }
+  }
+}
+  `;
+
+export const UPDATE_INTERESTS = gql`
+  mutation UpdateInterestsById($userId: ID!, $interests: [String]) {
+    updateInterestsById(userId: $userId, interests: $interests) {
+      _id
+      username
+      info {
+        name
+        phone
+        city
+        country
+      }
+      interests
+    }
+  }
+  `;
 
 
 

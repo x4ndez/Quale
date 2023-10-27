@@ -42,7 +42,26 @@ const userSchema = new Schema(
             type: Date,
             default: Date.now,
         },
-        info: infoSchema
+        info: {
+            name: {
+                type: String,
+                default: '',
+            },
+            phone: {
+                type: String,
+                default: '',
+            },
+            city: {
+                type: String,
+                default: '',
+            },
+            country: {
+                type: String,
+                default: '',
+            },
+
+        },
+        interests: [String],
     },
     {
 

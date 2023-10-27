@@ -1,5 +1,21 @@
 import { gql } from '@apollo/client'
 
+export const GET_USER_INFO = gql`
+query Query($userId: ID!) {
+  userById(userId: $userId) {
+    _id
+    username
+    info {
+      name
+      phone
+      city
+      country
+    }
+    interests
+  }
+}
+`;
+
 export const GET_RECENT_CONVOS = gql`
 query convosRecent {
     convosRecent {
