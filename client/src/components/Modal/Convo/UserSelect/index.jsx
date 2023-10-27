@@ -4,8 +4,11 @@ import { useQuery, useMutation } from '@apollo/client'
 import Auth from '../../../../../utils/auth'
 import { ADD_FRIEND } from '../../../../../utils/graphql/mutations';
 import { GET_USER_DATA } from '../../../../../utils/graphql/queries';
+import { useNavigate } from 'react-router-dom';
 
 function UserSelect(props) {
+
+    const navigate = useNavigate();
 
     const [addFriend] = useMutation(ADD_FRIEND);
     const { data, loading, error } = useQuery(GET_USER_DATA, {
@@ -54,7 +57,7 @@ function UserSelect(props) {
                                 userId: data.userById._id, friendId: commentData.props.createdBy._id,
                             }
                         })}>Add Friend</ul>)}
-                    <ul>Profile</ul>
+                    <ul onClick={() => navigate(`/profile/${commentData.props.createdBy._id}`)}>Profile</ul>
 
                 </div>
 

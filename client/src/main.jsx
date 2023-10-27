@@ -8,6 +8,7 @@ import ViewIndex from './views/ViewIndex'
 import ViewDashboard from "./views/ViewDashboard"
 import ViewError from "./views/ViewError"
 import ViewAccount from "./views/ViewAccount"
+import ViewProfile from './views/ViewProfile'
 
 const router = createBrowserRouter([
   {
@@ -26,6 +27,10 @@ const router = createBrowserRouter([
       {
         path: '/account',
         element: <ViewAccount />,
+      },
+      {
+        path: '/profile/:userId',
+        element: <ViewProfile />,
       },
     ],
   }
