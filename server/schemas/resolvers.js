@@ -131,6 +131,16 @@ const resolvers = {
 
         //ADD FRIEND
 
+        addFriend: async (parent, { userId, friendId }) => {
+
+            return await User.findByIdAndUpdate(userId, {
+                $addToSet: { friends: friendId }
+            }, {
+                returnDocument: 'after',
+            });
+
+        },
+
         //DELETE FRIEND
 
     },

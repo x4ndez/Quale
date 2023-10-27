@@ -16,6 +16,24 @@ query Query($userId: ID!) {
 }
 `;
 
+export const GET_USER_DATA = gql`
+query Query($userId: ID!) {
+  userById(userId: $userId) {
+    _id
+    username
+    email
+    friends {
+      _id
+      username
+    }
+    convos {
+      _id
+      roomName
+    }
+  }
+}
+`;
+
 export const GET_RECENT_CONVOS = gql`
 query convosRecent {
     convosRecent {

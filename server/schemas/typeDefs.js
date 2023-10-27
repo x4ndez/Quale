@@ -14,6 +14,7 @@ type Mutation {
     addCommentToConvo(convoId: ID!, commentContent: String, createdBy: ID!): Convo
     updateInfoById(userId: ID!, name: String! phone: String!, city: String!, country: String!): User
     updateInterestsById(userId: ID!, interests: [String]): User
+    addFriend(userId: ID!, friendId: ID!): User
 }
 
 type User {
@@ -21,6 +22,7 @@ type User {
     username: String
     password: String
     email: String
+    friends: [User]
     convos: [Convo]
     info: Info
     interests: [String]

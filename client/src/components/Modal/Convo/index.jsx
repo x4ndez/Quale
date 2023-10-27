@@ -1,10 +1,11 @@
 import './Convo.css'
 import { useState, useEffect } from 'react'
 import { useMutation } from '@apollo/client'
-import { useQuery } from "@apollo/client"
-import { GET_CONVO } from "../../../../utils/graphql/queries"
+import { useQuery, useLazyQuery } from "@apollo/client"
+import { GET_CONVO, GET_USER_DATA } from "../../../../utils/graphql/queries"
 import { socket } from '../../../config/socket'
 import Auth from '../../../../utils/auth'
+import UserSelect from './UserSelect'
 import { ADD_COMMENT } from '../../../../utils/graphql/mutations'
 
 function Convo(props) {
@@ -16,7 +17,7 @@ function Convo(props) {
     const [userSelect, setUserSelect] = useState();
     const [isConnected, setIsConnected] = useState(socket.connected);
 
-    const [addCommentToConvo, { data1, loading1, error1 }] = useMutation(ADD_COMMENT);
+    const [addCommentToConvo] = useMutation(ADD_COMMENT);
 
     const { loading, error, data } = useQuery(GET_CONVO, {
         variables: {
@@ -56,18 +57,6 @@ function Convo(props) {
         socket.emit('open', data.convoById.roomName);
         setChatLog([...data.convoById.comments]);
     }, [data]);
-
-    useEffect(() => {
-
-        console.log(chatLog);
-
-    }, [chatLog]);
-
-    useEffect(() => {
-
-        console.log(userSelect);
-
-    }, [userSelect]);
 
     const handleFormInput = (e) => {
 
@@ -122,12 +111,7 @@ function Convo(props) {
                                     {chatLog.map((comment, i) =>
                                     (<ul key={i}><span id={i} className='username clickable' onClick={() => userSelect === i ? setUserSelect() : setUserSelect(i)}>
                                         {comment.createdBy.username}
-                                        {userSelect === i ? (<div className='user-options'>
-
-                                            <ul>Add Friend</ul>
-                                            <ul>Profile</ul>
-
-                                        </div>) : ''}
+                                        {userSelect === i ? (<UserSelect props={comment} />) : ''}
                                     </span> said: {comment.comment}</ul>)
                                     )}
                                 </>
