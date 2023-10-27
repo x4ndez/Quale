@@ -13,6 +13,7 @@ function Convo(props) {
 
     const [msgInputVal, setMsgInputVal] = useState('');
     const [chatLog, setChatLog] = useState([]);
+    const [userSelect, setUserSelect] = useState();
     const [isConnected, setIsConnected] = useState(socket.connected);
 
     const [addCommentToConvo, { data1, loading1, error1 }] = useMutation(ADD_COMMENT);
@@ -61,6 +62,12 @@ function Convo(props) {
         console.log(chatLog);
 
     }, [chatLog]);
+
+    useEffect(() => {
+
+        console.log(userSelect);
+
+    }, [userSelect]);
 
     const handleFormInput = (e) => {
 
@@ -113,7 +120,15 @@ function Convo(props) {
                             {data.convoById.comments.length > 0
                                 ? <>
                                     {chatLog.map((comment, i) =>
-                                        (<ul key={i}>{comment.createdBy.username} said: {comment.comment}</ul>)
+                                    (<ul key={i}><span id={i} className='username clickable' onClick={() => userSelect === i ? setUserSelect() : setUserSelect(i)}>
+                                        {comment.createdBy.username}
+                                        {userSelect === i ? (<div className='user-options'>
+
+                                            <ul>Add Friend</ul>
+                                            <ul>Profile</ul>
+
+                                        </div>) : ''}
+                                    </span> said: {comment.comment}</ul>)
                                     )}
                                 </>
                                 : 'Start the conversation!'
