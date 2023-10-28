@@ -15,6 +15,16 @@ type Mutation {
     updateInfoById(userId: ID!, name: String! phone: String!, city: String!, country: String!): User
     updateInterestsById(userId: ID!, interests: [String]): User
     addFriend(userId: ID!, friendId: ID!): User
+    startPrivateConvo(userId: ID!, friendId: ID!): PrivateConvo
+    checkForPrivateConvo(userId: ID!, friendId: ID!): ID
+}
+
+type PrivateConvo {
+    _id: ID
+    comments: [Comment]
+    recipients: [User]
+    createdAt: String
+
 }
 
 type User {
@@ -26,6 +36,12 @@ type User {
     convos: [Convo]
     info: Info
     interests: [String]
+    privateConvos: [ConvoIndicator]
+}
+
+type ConvoIndicator {
+    reqUserId: ID
+    convoId: ID
 }
 
 type Info {

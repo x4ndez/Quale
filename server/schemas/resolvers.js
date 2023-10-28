@@ -1,5 +1,6 @@
-const { User, Convo } = require('../models');
+const { User, Convo, PrivateConvo } = require('../models');
 const { signToken, AuthenticationError } = require('../utils/auth');
+var { Types } = require('mongoose');
 
 const resolvers = {
 
@@ -143,6 +144,42 @@ const resolvers = {
 
         //DELETE FRIEND
 
+        //START PRIVATE CONVO
+
+        startPrivateConvo: async (parent, { userId, friendId }) => {
+
+            const privateConvoData = await PrivateConvo.create({
+                recipients: [userId, friendId]
+            });
+
+            const user = await User.findByIdAndUpdate(userId, {
+                $addToSet: { privateConvos: { reqUserId: friendId, privateConvoId: privateConvoData._id } }
+            }, {
+                returnDocument: 'after',
+            });
+
+            const friend = await User.findByIdAndUpdate(friendId, {
+                $addToSet: { privateConvos: { reqUserId: userId, privateConvoId: privateConvoData._id } }
+            }, {
+                returnDocument: 'after',
+            });
+
+            return privateConvoData;
+
+        },
+
+        checkForPrivateConvo: async (parent, { userId, friendId }) => {
+
+            const user = await User.findById(userId);
+
+            const convoIndicator = user.privateConvos.find((item) => {
+                if (item.reqUserId.toString() === friendId) return item;
+            });
+
+            return convoIndicator._id;
+
+        },
+
     },
 
     Convo: {
@@ -159,8 +196,8 @@ const resolvers = {
         }
     },
     // User: {
-    //     friends: async (parent) => {
-    //         const user = await User.findById(parent.friends);
+    //     privateConvos: async (parent) => {
+    //         const user = await User.findById(parent.privateConvos);
     //         return user;
     //     }
     // }

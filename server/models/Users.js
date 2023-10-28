@@ -62,6 +62,18 @@ const userSchema = new Schema(
 
         },
         interests: [String],
+        privateConvos: [{
+
+            reqUserId: {
+                type: Schema.Types.ObjectId,
+                ref: 'user',
+            },
+            convoId: {
+                type: Schema.Types.ObjectId,
+                ref: 'privateConvo',
+            }
+
+        }],
     },
     {
 
