@@ -29,7 +29,9 @@ function FriendsDisplay(props) {
                 {data
                     ? (data.userById.friends.length
                         ? (data.userById.friends.map((friend) =>
-                            (<div className='friend-image clickable'>{friend.username}</div>)
+                        (<div
+                            className='friend-image clickable'
+                            onClick={() => navigate(`/profile/${friend._id}`)}>{friend.username}</div>)
                         )) : 'No friends lol.'
                     )
                     : 'Loading...'}
