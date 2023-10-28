@@ -72,7 +72,6 @@ function ViewProfile() {
                 </div >
 
             ) : 'Loading...'}
-
         </>
 
     )

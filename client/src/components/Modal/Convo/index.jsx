@@ -111,7 +111,7 @@ function Convo(props) {
                                     {chatLog.map((comment, i) =>
                                     (<ul key={i}><span id={i} className='username clickable' onClick={() => userSelect === i ? setUserSelect() : setUserSelect(i)}>
                                         {comment.createdBy.username}
-                                        {userSelect === i ? (<UserSelect props={comment} />) : ''}
+                                        {userSelect === i ? (<UserSelect props={comment} modalProps={props} />) : ''}
                                     </span> said: {comment.comment}</ul>)
                                     )}
                                 </>

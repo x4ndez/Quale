@@ -8,6 +8,8 @@ import { useNavigate } from 'react-router-dom';
 
 function UserSelect(props) {
 
+    console.log(props.modalProps.setModalContent);
+
     const navigate = useNavigate();
 
     const [addFriend] = useMutation(ADD_FRIEND);
@@ -57,11 +59,16 @@ function UserSelect(props) {
                                 userId: data.userById._id, friendId: commentData.props.createdBy._id,
                             }
                         })}>Add Friend</ul>)}
-                    <ul onClick={() => navigate(`/profile/${commentData.props.createdBy._id}`)}>Profile</ul>
+                    <ul onClick={() => {
+                        props.modalProps.setModalActive(0);
+                        props.modalProps.setModalContent({ type: '' });
+                        navigate(`/profile/${commentData.props.createdBy._id}`)
+                    }}>Profile</ul>
 
-                </div>
+                </div >
 
-            ) : 'Loading...'}
+            ) : 'Loading...'
+            }
 
 
 
