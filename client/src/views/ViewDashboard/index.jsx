@@ -5,6 +5,7 @@ import Auth from '../../../utils/auth'
 import { GET_RECENT_CONVOS } from '../../../utils/graphql/queries'
 
 import ChatPreview from '../../components/ChatPreview'
+import FriendsDisplay from '../../components/FriendsDisplay'
 
 function ViewDashboard(props) {
 
@@ -58,6 +59,12 @@ function ViewDashboard(props) {
                         <div className='aside-box clickable'>Show All Rooms</div>
 
                     </aside>
+
+                    <section>
+
+                        <FriendsDisplay />
+
+                    </section>
 
                 </div>
 
