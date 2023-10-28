@@ -15,11 +15,11 @@ function FriendsDisplay(props) {
         }
     });
 
-    useEffect(() => {
-        if (!data) return;
-        console.log(data.userById.friends);
-        console.log(data.userById.friends[0].username);
-    }, [data]);
+    // useEffect(() => {
+    //     if (!data) return;
+    //     // console.log(data.userById.friends);
+    //     // console.log(data.userById.friends[0].username);
+    // }, [data]);
 
     return (
         <>
