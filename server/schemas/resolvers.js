@@ -157,7 +157,13 @@ const resolvers = {
             const user = await User.findById(parent.createdBy);
             return user;
         }
-    }
+    },
+    // User: {
+    //     friends: async (parent) => {
+    //         const user = await User.findById(parent.friends);
+    //         return user;
+    //     }
+    // }
 
 };
 
