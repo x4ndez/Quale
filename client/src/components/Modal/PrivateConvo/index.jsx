@@ -14,11 +14,14 @@ import { INITIATE_PRIVATE_CONVO, ADD_COMMENT_PRIVATE_CONVO } from '../../../../u
 
 function PrivateConvo(props) {
 
-    // const [addPrivateComment] = useMutation(ADD_PRIVATE_COMMENT);
+    const [msgInputVal, setMsgInputVal] = useState('');
+    const [chatLog, setChatLog] = useState([]);
+    const [userSelect, setUserSelect] = useState();
+    const [isConnected, setIsConnected] = useState(socket.connected);
+    const [privateConvoData, setPrivateConvoData] = useState();
+
     const [initiatePrivateConvo, { data: initiateData }] = useMutation(INITIATE_PRIVATE_CONVO);
     const [addCommentPrivateConvo] = useMutation(ADD_COMMENT_PRIVATE_CONVO);
-
-    const [privateConvoData, setPrivateConvoData] = useState();
 
     useEffect(() => {
         initiatePrivateConvo({
@@ -38,46 +41,41 @@ function PrivateConvo(props) {
         console.log(privateConvoData);
     }, [privateConvoData]);
 
-    // console.log(Auth.getProfile().data._id);
+    useEffect(() => {
 
-    const [msgInputVal, setMsgInputVal] = useState('');
-    const [chatLog, setChatLog] = useState([]);
-    const [userSelect, setUserSelect] = useState();
-    // const [isConnected, setIsConnected] = useState(socket.connected);
+        function onConnect() {
+            setIsConnected(true);
+        }
 
-    // const [addCommentToConvo] = useMutation(ADD_COMMENT);
+        function onDisconnect() {
+            setIsConnected(false);
+        }
 
+        function onChatEvent(value) {
+            setChatLog(chatLog => [...chatLog, value]);
+        }
 
-    // useEffect(() => {
+        socket.on('connect', onConnect);
+        socket.on('disconnect', onDisconnect);
+        socket.on('chat', onChatEvent);
 
-    //     function onConnect() {
-    //         setIsConnected(true);
-    //     }
+        return () => {
+            socket.off('connect', onConnect);
+            socket.off('disconnect', onDisconnect);
+            socket.off('chat', onChatEvent);
+        };
 
-    //     function onDisconnect() {
-    //         setIsConnected(false);
-    //     }
+    }, []);
 
-    //     function onChatEvent(value) {
-    //         setChatLog(chatLog => [...chatLog, value]);
-    //     }
+    useEffect(() => {
+        if (!privateConvoData) return;
+        socket.emit('open', privateConvoData._id);
+        setChatLog([...privateConvoData.comments]);
+    }, [privateConvoData]);
 
-    //     socket.on('connect', onConnect);
-    //     socket.on('disconnect', onDisconnect);
-    //     socket.on('chat', onChatEvent);
-
-    //     return () => {
-    //         socket.off('connect', onConnect);
-    //         socket.off('disconnect', onDisconnect);
-    //         socket.off('chat', onChatEvent);
-    //     };
-
-    // }, []);
-
-    // useEffect(() => {
-    //     socket.emit('open', data.convoById.roomName);
-    //     setChatLog([...privateConvoData.comments]);
-    // }, [privateConvoData]);
+    useEffect(() => {
+        console.log(chatLog);
+    }, [chatLog]);
 
     const handleFormInput = (e) => {
 
@@ -108,7 +106,7 @@ function PrivateConvo(props) {
             }
         });
 
-        // socket.emit('chat', comment);
+        socket.emit('chat', comment);
 
         setMsgInputVal('');
 
@@ -129,13 +127,12 @@ function PrivateConvo(props) {
 
                                 {privateConvoData.comments.length > 0
                                     ? <>
-                                        {/* {chatLog.map((comment, i) =>
+                                        {chatLog.map((comment, i) =>
                                         (<ul key={i}><span id={i} className='username clickable' onClick={() => userSelect === i ? setUserSelect() : setUserSelect(i)}>
                                             {comment.createdBy.username}
                                             {userSelect === i ? (<UserSelect props={comment} modalProps={props} />) : ''}
                                         </span> said: {comment.comment}</ul>)
-                                        )} */}
-                                        CHATLOG
+                                        )}
                                     </>
                                     : 'Start the conversation!'
                                 }

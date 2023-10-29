@@ -55,7 +55,7 @@ const startApolloServer = async () => {
         io.on('connect', (socket) => {
 
             socket.on('open', (userInp_roomName) => {
-
+                console.log(userInp_roomName);
                 const roomName = userInp_roomName;
 
                 socket.join(roomName);
