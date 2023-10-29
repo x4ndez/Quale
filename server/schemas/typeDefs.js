@@ -5,6 +5,7 @@ type Query {
     userById(userId: ID!): User
     convosRecent: [Convo]
     convoById(convoId: String!): Convo
+    getPrivateConvo(convoId: ID!): PrivateConvo
 }
 
 type Mutation {
@@ -17,6 +18,8 @@ type Mutation {
     addFriend(userId: ID!, friendId: ID!): User
     startPrivateConvo(userId: ID!, friendId: ID!): PrivateConvo
     checkForPrivateConvo(userId: ID!, friendId: ID!): ID
+    initiatePrivateConvo(userId: ID!, friendId: ID!): PrivateConvo
+    addCommentToPrivateConvo(convoId: ID!, commentContent: String, createdBy: ID!): PrivateConvo
 }
 
 type PrivateConvo {
@@ -41,7 +44,7 @@ type User {
 
 type ConvoIndicator {
     reqUserId: ID
-    convoId: ID
+    privateConvoId: ID
 }
 
 type Info {

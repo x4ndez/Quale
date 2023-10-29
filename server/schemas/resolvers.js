@@ -20,6 +20,10 @@ const resolvers = {
             return await Convo.findById(convoId);
             // .populate('comments.createdBy');
         },
+        getPrivateConvo: async (parent, { convoId }) => {
+            return await PrivateConvo.findById(convoId);
+            // .populate('comments.createdBy');
+        },
     },
     Mutation: {
         addUser: async (parent, { username, password, email }) => {
@@ -176,7 +180,67 @@ const resolvers = {
                 if (item.reqUserId.toString() === friendId) return item;
             });
 
-            return convoIndicator._id;
+            if (convoIndicator) return convoIndicator._id;
+        },
+
+        initiatePrivateConvo: async (parent, { userId, friendId }) => {
+
+            // Pull the client's data
+            const user = await User.findById(userId);
+
+            // Check if the client already has a private convo with target user
+            const convoIndicator = user.privateConvos.find((item) => {
+                if (item.reqUserId.toString() === friendId) return item;
+            });
+
+            // IF: there isn't a private convo, create one and return the new private convo to the client
+            if (!convoIndicator) {
+                // Create new private convo
+                const privateConvoData = await PrivateConvo.create({
+                    recipients: [userId, friendId]
+                });
+
+                // Add the private convo "indicator" to the client
+                // Private convo indicator : { reqUserId, privateConvoId }
+                // reqUserID is the ID of the target user, so in the .find function above, the user can see
+                // if the convo already exists betwen user and target user.
+                // privateConvoId directs to the convo so the data can be pulled and given to the client.
+                const user = await User.findByIdAndUpdate(userId, {
+                    $addToSet: { privateConvos: { reqUserId: friendId, privateConvoId: privateConvoData._id } }
+                }, {
+                    returnDocument: 'after',
+                });
+
+                // Add the private convo "indicator" to the target client
+                const friend = await User.findByIdAndUpdate(friendId, {
+                    $addToSet: { privateConvos: { reqUserId: userId, privateConvoId: privateConvoData._id } }
+                }, {
+                    returnDocument: 'after',
+                });
+
+                // return the new private convo
+                return privateConvoData;
+            }
+
+            // return the existing private convo
+            return await PrivateConvo.findById(convoIndicator.privateConvoId);
+
+        },
+
+        //ADD A COMMENT TO A PRIVATE CONVO
+
+        addCommentToPrivateConvo: async (parent, { convoId, commentContent, createdBy }) => {
+
+            const newComment = {
+                comment: commentContent,
+                createdBy: createdBy,
+            }
+
+            return await PrivateConvo.findByIdAndUpdate(convoId, {
+                $addToSet: { comments: newComment }
+            }, {
+                returnDocument: 'after',
+            });
 
         },
 

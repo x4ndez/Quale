@@ -6,6 +6,7 @@ import CreateRoom from './CreateRoom'
 import Convo from './Convo'
 import Login from './Login'
 import Signup from './Signup'
+import PrivateConvo from './PrivateConvo'
 
 function Modal(props) {
 
@@ -15,6 +16,7 @@ function Modal(props) {
         if (props.modalContent.type === 'Convo') return <Convo {...props} />;
         if (props.modalContent.type === 'Login') return <Login {...props} />;
         if (props.modalContent.type === 'Signup') return <Signup {...props} />;
+        if (props.modalContent.type === 'PrivateConvo') return <PrivateConvo {...props} />;
         return '';
 
     }

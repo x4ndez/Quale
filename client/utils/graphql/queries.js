@@ -77,3 +77,25 @@ query GET_CONVO($convoId: String!) {
 }
 `;
 
+export const GET_PRIVATE_CONVO = gql`
+query Query($convoId: ID!) {
+  getPrivateConvo(convoId: $convoId) {
+    _id
+    comments {
+      _id
+      comment
+      createdBy {
+        _id
+        username
+      }
+      createdAt
+    }
+    recipients {
+      _id
+      username
+    }
+    createdAt
+  }
+}
+`;
+

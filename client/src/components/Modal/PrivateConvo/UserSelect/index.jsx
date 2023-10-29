@@ -64,15 +64,6 @@ function UserSelect(props) {
                         props.modalProps.setModalContent({ type: '' });
                         navigate(`/profile/${commentData.props.createdBy._id}`)
                     }}>Profile</ul>
-                    <ul onClick={() => {
-                        props.modalProps.setModalActive(1);
-                        props.modalProps.setModalContent({
-                            type: 'PrivateConvo',
-                            feedback: {
-                                reqUserId: commentData.props.createdBy._id
-                            }
-                        });
-                    }}>Private Message</ul>
 
                 </div >
 

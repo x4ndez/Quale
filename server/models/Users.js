@@ -68,7 +68,7 @@ const userSchema = new Schema(
                 type: Schema.Types.ObjectId,
                 ref: 'user',
             },
-            convoId: {
+            privateConvoId: {
                 type: Schema.Types.ObjectId,
                 ref: 'privateConvo',
             }

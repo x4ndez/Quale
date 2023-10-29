@@ -100,6 +100,77 @@ export const ADD_FRIEND = gql`
   }
   `;
 
+export const START_PRIVATE_CONVO = gql`
+  mutation Mutation($userId: ID!, $friendId: ID!) {
+    startPrivateConvo(userId: $userId, friendId: $friendId) {
+      comments {
+        _id
+        comment
+        createdBy {
+          _id
+          username
+        }
+        createdAt
+      }
+      recipients {
+        _id
+        username
+      }
+      createdAt
+      _id
+    }
+  }
+  `;
 
+export const CHECK_PRIVATE_CONVO = gql`
+  mutation CheckForPrivateConvo($userId: ID!, $friendId: ID!) {
+    checkForPrivateConvo(userId: $userId, friendId: $friendId)
+  }
+  `;
+
+export const INITIATE_PRIVATE_CONVO = gql`
+mutation InitiatePrivateConvo($userId: ID!, $friendId: ID!) {
+  initiatePrivateConvo(userId: $userId, friendId: $friendId) {
+    _id
+    comments {
+      _id
+      comment
+      createdBy {
+        _id
+        username
+      }
+      createdAt
+    }
+    recipients {
+      _id
+      username
+    }
+    createdAt
+  }
+}
+`;
+
+export const ADD_COMMENT_PRIVATE_CONVO = gql`
+mutation AddCommentToPrivateConvo($convoId: ID!, $commentContent: String, $createdBy: ID!) {
+  addCommentToPrivateConvo(convoId: $convoId, commentContent: $commentContent, createdBy: $createdBy) {
+    _id
+    comments {
+      _id
+      comment
+      createdBy {
+        _id
+        username
+      }
+      createdAt
+    }
+    recipients {
+      _id
+      username
+    }
+    createdAt
+  }
+}
+
+`;
 
 
