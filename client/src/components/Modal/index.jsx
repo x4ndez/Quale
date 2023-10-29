@@ -10,6 +10,7 @@ import PrivateConvo from './PrivateConvo'
 
 function Modal(props) {
 
+    // Render the modal content and serve any feedback data through props
     const handleModalContent = () => {
 
         if (props.modalContent.type === 'CreateRoom') return <CreateRoom {...props} />;

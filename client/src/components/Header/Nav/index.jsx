@@ -1,6 +1,10 @@
 import { Link } from 'react-router-dom'
+import { useState } from 'react'
+import Auth from '../../../../utils/auth'
 
 function Nav(props) {
+
+    const [authData, setAuthData] = useState(Auth.getProfile())
 
     return (
         <>
@@ -13,9 +17,10 @@ function Nav(props) {
                 <a onClick={() => {
                     props.setModalActive(1);
                     props.setModalContent({ type: 'Signup' });
-                }}>Signup</a> /
-                <Link to='/dashboard'>Dashboard</Link> / 
-                <Link to='/account'>Account</Link>
+                }}>Signup</a>
+                {authData ? (<Link to='/dashboard'>Dashboard</Link>) : ''}
+                {authData ? (<Link to='/account'>Account</Link>) : ''}
+
 
             </nav>
         </>

@@ -134,8 +134,6 @@ const resolvers = {
 
         },
 
-        //ADD FRIEND
-
         addFriend: async (parent, { userId, friendId }) => {
 
             return await User.findByIdAndUpdate(userId, {
@@ -156,12 +154,8 @@ const resolvers = {
 
         },
 
-        //DELETE FRIEND
-
-        //START PRIVATE CONVO
-
         startPrivateConvo: async (parent, { userId, friendId }) => {
-
+            // FUNCTION DEPRECATED
             const privateConvoData = await PrivateConvo.create({
                 recipients: [userId, friendId]
             });
@@ -183,7 +177,7 @@ const resolvers = {
         },
 
         checkForPrivateConvo: async (parent, { userId, friendId }) => {
-
+            // FUNCTION DEPRECATED
             const user = await User.findById(userId);
 
             const convoIndicator = user.privateConvos.find((item) => {
@@ -236,8 +230,6 @@ const resolvers = {
             return await PrivateConvo.findById(convoIndicator.privateConvoId);
 
         },
-
-        //ADD A COMMENT TO A PRIVATE CONVO
 
         addCommentToPrivateConvo: async (parent, { convoId, commentContent, createdBy }) => {
 
