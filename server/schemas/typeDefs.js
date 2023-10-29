@@ -16,6 +16,7 @@ type Mutation {
     updateInfoById(userId: ID!, name: String! phone: String!, city: String!, country: String!): User
     updateInterestsById(userId: ID!, interests: [String]): User
     addFriend(userId: ID!, friendId: ID!): User
+    removeFriend(userId: ID!, friendId: ID!): User
     startPrivateConvo(userId: ID!, friendId: ID!): PrivateConvo
     checkForPrivateConvo(userId: ID!, friendId: ID!): ID
     initiatePrivateConvo(userId: ID!, friendId: ID!): PrivateConvo

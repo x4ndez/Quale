@@ -100,6 +100,15 @@ export const ADD_FRIEND = gql`
   }
   `;
 
+  export const REMOVE_FRIEND = gql`
+  mutation RemoveFriend($userId: ID!, $friendId: ID!) {
+    removeFriend(userId: $userId, friendId: $friendId) {
+      _id
+      username
+    }
+  }
+  `;
+
 export const START_PRIVATE_CONVO = gql`
   mutation Mutation($userId: ID!, $friendId: ID!) {
     startPrivateConvo(userId: $userId, friendId: $friendId) {

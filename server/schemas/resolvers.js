@@ -146,6 +146,16 @@ const resolvers = {
 
         },
 
+        removeFriend: async (parent, { userId, friendId }) => {
+
+            return await User.findByIdAndUpdate(userId, {
+                $pull: { friends: friendId },
+            }, {
+                returnDocument: 'after',
+            });
+
+        },
+
         //DELETE FRIEND
 
         //START PRIVATE CONVO
