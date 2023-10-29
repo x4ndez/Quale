@@ -20,30 +20,38 @@ function UserSelect(props) {
     });
 
     const [commentData, setCommentData] = useState(props);
+    const [friendStatus, setFriendStatus] = useState()
 
     // console.log(props.comment.createdBy._id);
 
     function isFriend() {
 
-        // const myUserId = data.userById._id;
-        // const myFriends = data.userById.friends;
-        // const yourUserId = commentData.props.createdBy._id;
+        const myUserId = data.userById._id;
+        const myFriends = data.userById.friends;
+        const yourUserId = commentData.props.createdBy._id;
 
-        // console.log(yourUserId);
-        // console.log(myFriends._id);
+        console.log(yourUserId);
+        console.log(myFriends);
         // console.log(myFriends.forEach((myFriend) => {
         //     if (myFriend._id === yourUserId) return true;
         // }));
 
-        // if (myFriends.includes({ _id: yourUserId })) {
-        //     console.log(true);
-        //     return true;
-        // }
-        // console.log(false);
-        return false;
+        const status = myFriends.find((friend) => friend._id === yourUserId)
+        if (status === undefined) return false
 
+        return true;
+
+        // if (status === true) return true
+        // else return false;
 
     }
+
+    useEffect(() => {
+        if (!data) return;
+        // isFriend();
+        // console.log(isFriend());
+        setFriendStatus(isFriend());
+    }, [data]);
 
     return (
         <>
@@ -52,7 +60,7 @@ function UserSelect(props) {
 
                 <div className='user-options'>
 
-                    {isFriend()
+                    {friendStatus
                         ? (<ul>Remove Friend</ul>)
                         : (<ul onClick={() => addFriend({
                             variables: {
