@@ -28,10 +28,22 @@ const resolvers = {
     Mutation: {
         addUser: async (parent, { username, password, email }) => {
 
-            //PROCESS USER DATA HERE
+            const usernameValidate = await User.findOne({ username: username });
+            const emailValidate = await User.findOne({ email: email });
 
-            //USERNAME VALIDATION
-
+            //VALIDATIONS:
+            // Username not in DB
+            // Email not in DB
+            // Password is 8 chars or greater
+            // Username is ''
+            // Password is ''
+            if (usernameValidate ||
+                emailValidate ||
+                password.length < 8 ||
+                username === '' ||
+                email === '') {
+                throw new Error('VALIDATION ERROR.');
+            }
 
             const newUserData = {
                 username: username,
@@ -41,6 +53,9 @@ const resolvers = {
 
             const user = await User.create(newUserData);
 
+            // email to be sent to user for activation
+            // this will no longer sign a token, user must login to receive a token
+
             const token = signToken(user);
 
             return { token, user };
@@ -48,6 +63,8 @@ const resolvers = {
         },
 
         login: async (parent, { username, password }) => {
+
+            // validation here for account is activated
 
             const userInput = {
                 username: username,
