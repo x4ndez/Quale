@@ -30,26 +30,15 @@ function UserSelect(props) {
         const myFriends = data.userById.friends;
         const yourUserId = commentData.props.createdBy._id;
 
-        console.log(yourUserId);
-        console.log(myFriends);
-        // console.log(myFriends.forEach((myFriend) => {
-        //     if (myFriend._id === yourUserId) return true;
-        // }));
-
         const status = myFriends.find((friend) => friend._id === yourUserId)
         if (status === undefined) return false
 
         return true;
 
-        // if (status === true) return true
-        // else return false;
-
     }
 
     useEffect(() => {
         if (!data) return;
-        // isFriend();
-        // console.log(isFriend());
         setFriendStatus(isFriend());
     }, [data]);
 
