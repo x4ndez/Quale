@@ -100,7 +100,7 @@ export const ADD_FRIEND = gql`
   }
   `;
 
-  export const REMOVE_FRIEND = gql`
+export const REMOVE_FRIEND = gql`
   mutation RemoveFriend($userId: ID!, $friendId: ID!) {
     removeFriend(userId: $userId, friendId: $friendId) {
       _id
@@ -182,4 +182,15 @@ mutation AddCommentToPrivateConvo($convoId: ID!, $commentContent: String, $creat
 
 `;
 
+export const USERNAME_EXISTS = gql`
+mutation Mutation($username: String!) {
+  usernameExists(username: $username)
+}
+`;
+
+export const EMAIL_EXISTS = gql`
+mutation EmailExists($email: String!) {
+  emailExists(email: $email)
+}
+`;
 

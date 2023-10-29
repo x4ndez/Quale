@@ -245,6 +245,25 @@ const resolvers = {
             });
 
         },
+        emailExists: async (parent, { email }) => {
+
+            const query = await User.findOne({ email: email });
+
+            if (query) return true;
+            else return false;
+
+
+        },
+
+        usernameExists: async (parent, { username }) => {
+
+            const query = await User.findOne({ username: username });
+
+            if (query) return true;
+            else return false;
+
+
+        },
 
     },
 

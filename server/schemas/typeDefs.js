@@ -21,6 +21,8 @@ type Mutation {
     checkForPrivateConvo(userId: ID!, friendId: ID!): ID
     initiatePrivateConvo(userId: ID!, friendId: ID!): PrivateConvo
     addCommentToPrivateConvo(convoId: ID!, commentContent: String, createdBy: ID!): PrivateConvo
+    emailExists(email: String!): Boolean
+    usernameExists(username: String!): Boolean
 }
 
 type PrivateConvo {

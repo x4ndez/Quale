@@ -1,19 +1,21 @@
 import { useState, useEffect } from 'react'
 import { useMutation } from '@apollo/client';
-import { ADD_USER } from '../../../../utils/graphql/mutations'
+import { ADD_USER, USERNAME_EXISTS, EMAIL_EXISTS } from '../../../../utils/graphql/mutations'
 
 function Signup(props) {
 
     const [usernameVal, setUsernameVal] = useState('');
     const [passwordVal, setPasswordVal] = useState('');
     const [emailVal, setEmailVal] = useState('');
-    // 0 = default, 1 = error, 2 = ok
+    // 0 = default, 1 = error, 2 = ok, 3 = X already exists
     const [passwordErr, setPasswordErr] = useState({ code: 0, err: '' });
     const [emailErr, setEmailErr] = useState({ code: 0, err: '' });
     const [usernameErr, setUsernameErr] = useState({ code: 0, err: '' });
     const [signupErr, setSignupErr] = useState({ code: 0, err: '' });
 
     const [addUser, { data, loading, error }] = useMutation(ADD_USER);
+    const [usernameExists, { data: usernameExistsBool }] = useMutation(USERNAME_EXISTS);
+    const [emailExists, { data: emailExistsBool }] = useMutation(EMAIL_EXISTS);
 
     useEffect(() => {
         console.log(data);
@@ -33,18 +35,37 @@ function Signup(props) {
         const { name, value } = e.target;
         if (name === 'username') {
 
-            setUsernameErr({ code: 2, err: '✔' });
-            //check if password is taken
+            if (value != '') {
+                usernameExists({
+                    variables: {
+                        username: value,
+                    }
+                });
+            } else {
+                setUsernameErr({ code: 1, err: 'Username cannot be left blank.' })
+            }
+            // check if username is taken
+
 
         }
         if (name === 'email') {
             const emailRegExp = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
+            console.log('lol');
+
             if (emailRegExp.test(value)) {
                 setEmailErr({ code: 2, err: '✔' });
+                //check if email is taken
+                emailExists({
+                    variables: {
+                        email: value,
+                    }
+                });
+            } else if (value === '') {
+                setEmailErr({ code: 1, err: 'Email cannot be left blank.' });
             } else {
                 setEmailErr({ code: 1, err: 'Email not valid.' });
             }
-            //check if email is taken
+
         }
         if (name === 'password') {
             if (value.length < 8) {
@@ -55,6 +76,25 @@ function Signup(props) {
         }
 
     }
+
+    // Set username error code/msg when checking if the username exists in DB
+    useEffect(() => {
+        if (!usernameExistsBool) return;
+
+        if (!usernameExistsBool.usernameExists) setUsernameErr({ code: 2, err: '✔' })
+        else setUsernameErr({ code: 3, err: 'Username already exists' });
+
+    }, [usernameExistsBool]);
+
+    // Set email error code/msg when checking if the email exists in DB
+    useEffect(() => {
+
+        if (!emailExistsBool) return;
+
+        if (!emailExistsBool.emailExists) setEmailErr({ code: 2, err: '✔' })
+        else setEmailErr({ code: 3, err: 'Email already exists' });
+
+    }, [emailExistsBool]);
 
     const handleFormSubmit = (e) => {
 
@@ -92,7 +132,9 @@ function Signup(props) {
                     onChange={handleFormInput}
                     value={usernameVal}
                     onBlur={handleFocusOff}
-                    placeholder="xandeisop" />
+                    placeholder="xandeisop"
+                    className={usernameErr.code === 0 || usernameErr.code === 2 ? 'valid' : 'invalid'} />
+
 
                 {usernameErr.err}
 
@@ -101,7 +143,8 @@ function Signup(props) {
                     onChange={handleFormInput}
                     value={emailVal}
                     onBlur={handleFocusOff}
-                    placeholder="xande@xandedev.com" />
+                    placeholder="xande@xandedev.com"
+                    className={emailErr.code === 0 || emailErr.code === 2 ? 'valid' : 'invalid'} />
 
                 {emailErr.err}
 
@@ -110,7 +153,8 @@ function Signup(props) {
                     name='password'
                     onChange={handleFormInput}
                     onBlur={handleFocusOff}
-                    value={passwordVal} />
+                    value={passwordVal}
+                    className={passwordErr.code === 0 || passwordErr.code === 2 ? 'valid' : 'invalid'} />
 
                 {passwordErr.err}
 
