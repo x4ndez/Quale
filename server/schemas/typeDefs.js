@@ -9,7 +9,7 @@ type Query {
 }
 
 type Mutation {
-    addUser(username: String!, password: String!, email: String!): Auth
+    addUser(username: String!, password: String!, email: String!): User
     login(username: String!, password: String!): Auth
     addConvo(roomName: String!, createdBy: ID!): Convo
     addCommentToConvo(convoId: ID!, commentContent: String, createdBy: ID!): Convo
@@ -23,6 +23,8 @@ type Mutation {
     addCommentToPrivateConvo(convoId: ID!, commentContent: String, createdBy: ID!): PrivateConvo
     emailExists(email: String!): Boolean
     usernameExists(username: String!): Boolean
+    activateVerify(userId: ID!): User
+    activateAccount(userId: ID!, activateCode: String!): Boolean
 }
 
 type PrivateConvo {
@@ -43,6 +45,8 @@ type User {
     info: Info
     interests: [String]
     privateConvos: [ConvoIndicator]
+    activateCode: String
+    accountActivated: Boolean
 }
 
 type ConvoIndicator {

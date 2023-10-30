@@ -1,6 +1,7 @@
 const { User, Convo, PrivateConvo } = require('../models');
 const { signToken, AuthenticationError } = require('../utils/auth');
 var { Types } = require('mongoose');
+const { sendCode } = require('../utils/smtpFunc');
 
 const resolvers = {
 
@@ -52,19 +53,19 @@ const resolvers = {
             }
 
             const user = await User.create(newUserData);
-
             // email to be sent to user for activation
             // this will no longer sign a token, user must login to receive a token
 
-            const token = signToken(user);
+            return user;
 
-            return { token, user };
+            // DEPRECATED
+            // const token = signToken(user);
+
+            // return { token, user };
 
         },
 
         login: async (parent, { username, password }) => {
-
-            // validation here for account is activated
 
             const userInput = {
                 username: username,
@@ -279,6 +280,34 @@ const resolvers = {
             if (query) return true;
             else return false;
 
+
+        },
+
+        // when guided to the activate page, email will be sent IF the account has not been activated. 
+        // sending the email on the activate page rather than at login will prevent two emails being sent at login
+        // and if a user delayed activating after creating an account, they'll receive the email again as a reminder.
+        activateVerify: async (parent, { userId }) => {
+
+            const user = await User.findById(userId);
+
+            if (!user.accountActivated) sendCode(user);
+
+            return user;
+
+        },
+
+        activateAccount: async (parent, { userId, activateCode }) => {
+
+            const user = await User.findById(userId);
+
+            if (user.activateCode === activateCode) {
+                const activatedUser = await User.findByIdAndUpdate(
+                    userId,
+                    { accountActivated: true },
+                    { returnDocument: 'after' },);
+                return true;
+            }
+            else return false;
 
         },
 

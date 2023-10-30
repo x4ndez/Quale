@@ -1,8 +1,11 @@
 import { useState, useEffect } from 'react'
 import { useMutation } from '@apollo/client';
 import { ADD_USER, USERNAME_EXISTS, EMAIL_EXISTS } from '../../../../utils/graphql/mutations'
+import { useNavigate } from 'react-router-dom'
 
 function Signup(props) {
+
+    const navigate = useNavigate();
 
     const [usernameVal, setUsernameVal] = useState('');
     const [passwordVal, setPasswordVal] = useState('');
@@ -114,7 +117,9 @@ function Signup(props) {
 
             setSignupErr({ code: 1, err: 'Signup loading...' });
 
-            return props.setModalContent({ type: 'Login' });
+            props.setModalContent({ type: '' });
+            props.setModalActive(0);
+            navigate('/');
 
         } else {
             setSignupErr({ code: 1, err: 'Signup info not valid' });

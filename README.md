@@ -6,3 +6,17 @@ Rendering/GraphQL issue: When entering a public convo, then opening a private co
 When entering a private convo (maybe also public?) and there's no comments to pull, and you make a comment, it won't render the comment in the chat log.  It must be refreshed to render, after the initial refresh the chatlog behaves as normal.  This will be due to the else statement needing a conditional to check if the chatlog has been updated.
 
 Not a visual bug yet:  Need to make the account/about page not a table; as react seems to have issues with table elements as I have it now.
+
+IF too many emails have been sent, Outlook will bar emails from sending for a period.  I can't control this.  If there are issues activating the account, it is for this reason.  Normal behaviour can be seen in the walkthrough video provided.  You can use these pre-made credentials:
+Username: xxx
+Password: xxx
+
+TODO:
+STYLING  - tue
+ON SIGN ON STATES mon night or tuesday night
+FORUM - FRIENDS ONLY now
+BUG FIXES - mon night
+HEROKU - mon night
+PASSWORD HASHING
+PRESENTATION & DOCUMENTATION - tuesday night
+IF TIME: AVATAR

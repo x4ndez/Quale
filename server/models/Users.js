@@ -1,5 +1,6 @@
 const { Schema, model } = require("mongoose");
 const infoSchema = require('./Info');
+const { generateCode } = require('../utils/common');
 
 // Table users {
 //     _id ID
@@ -74,6 +75,18 @@ const userSchema = new Schema(
             }
 
         }],
+        // generates a 6 digit code, the arg is the number of digits you want the code.
+        activateCode: {
+            type: String,
+            default: generateCode(6),
+        },
+        // sets to true once the user has activated their account.
+        // will be checked upon every login.
+        // will receive JWT only on successful login.
+        accountActivated: {
+            type: Boolean,
+            default: false,
+        }
     },
     {
 

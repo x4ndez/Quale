@@ -15,17 +15,34 @@ function Login(props) {
 
     useEffect(() => {
 
-        if (data) {
-            console.log('login success');
-            // console.log(data.login.token);
+        if (!data) return;
+
+        if (!data.login.user.accountActivated) {
+            props.setModalContent('');
+            props.setModalActive(0);
+            navigate(`/activate/${data.login.user._id}`);
+        } else {
+
             Auth.login(data.login.token);
+            props.setModalContent('');
             props.setModalActive(0);
             navigate('/dashboard');
-        } else {
-            console.log('login failure');
-            
-            navigate('/');
+
         }
+        console.log(data.login.user.accountActivated)
+
+        // if (data) {
+
+        //     console.log(data);
+
+        // Auth.login(data.login.token);
+        // props.setModalActive(0);
+        // navigate('/dashboard');
+        // } else {
+        //     console.log('login failure');
+
+        //     navigate('/');
+        // }
 
     }, [data]);
 
