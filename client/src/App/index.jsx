@@ -62,15 +62,11 @@ function App() {
         setModalContent={setModalContent}
       />
 
-      <main className='flex-center-h'>
-
         <Outlet
           context={
             [modalActive, setModalActive, modalContent, setModalContent]
           }
         />
-
-      </main>
 
     </ApolloProvider>
 

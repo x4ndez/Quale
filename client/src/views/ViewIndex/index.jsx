@@ -1,8 +1,15 @@
+import './ViewIndex.css'
+
 function ViewIndex() {
 
     return (
         <>
-            Index
+            <div className='index-container'>
+
+                <div className='index-slides index-slide-01'></div>
+                <div className='index-slides index-slide-02'></div>
+
+            </div>
         </>
     )
 }

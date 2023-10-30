@@ -1,0 +1,37 @@
+.index-container {
+
+
+    width: 200vw;
+    height: 200vh;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+}
+
+.index-slides {
+
+    width: 100vw;
+    height: 100vh;
+
+    /* display: flex;
+    justify-content: center;
+    align-items: center; */
+
+}
+
+.index-slide-01 {
+
+    background-image: url('../../assets/images/index-bg.jpeg');
+    background-size: cover;
+    background-position: 70%;
+
+}
+
+.index-slide-02 {
+
+    background-color: slategray;
+
+}

@@ -67,24 +67,26 @@ function ViewAccountActivate(props) {
     return (
         <>
 
-            {activateVerifyData
-                ? (<>
-                    <h2>Activate your account!</h2>
-                    <form onSubmit={handleFormSubmit}>
+            <main className='flex-center-h'>
 
-                        <label htmlFor='activateCode'>Activation Code: </label>
-                        <input type='text'
-                            name='activateCode'
-                            value={activateCodeVal}
-                            onChange={handleFormInput}
-                        />
-                        <input type='submit' value='Submit' />
+                {activateVerifyData
+                    ? (<>
+                        <h2>Activate your account!</h2>
+                        <form onSubmit={handleFormSubmit}>
 
-                    </form>
-                </>)
-                : 'Loading...'}
+                            <label htmlFor='activateCode'>Activation Code: </label>
+                            <input type='text'
+                                name='activateCode'
+                                value={activateCodeVal}
+                                onChange={handleFormInput}
+                            />
+                            <input type='submit' value='Submit' />
 
-            {/* <h2>Activate your account!</h2>
+                        </form>
+                    </>)
+                    : 'Loading...'}
+
+                {/* <h2>Activate your account!</h2>
             <form>
 
                 <label htmlFor='activateCode'>Activation Code: </label>
@@ -94,6 +96,9 @@ function ViewAccountActivate(props) {
                 <input type='submit' value='Submit' />
 
             </form> */}
+
+            </main>
+
         </>
     )
 }
