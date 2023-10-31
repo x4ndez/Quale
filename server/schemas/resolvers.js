@@ -245,7 +245,7 @@ const resolvers = {
             }
 
             // return the existing private convo
-            return await PrivateConvo.findById(convoIndicator.privateConvoId);
+            return await PrivateConvo.findById(convoIndicator.privateConvoId).populate('recipients');
 
         },
 
@@ -326,6 +326,12 @@ const resolvers = {
             return user;
         }
     },
+    PrivateConvo: {
+        recipients: async (parent) => {
+            const recipiets = await PrivateConvo.findById(parent._id).populate('recipients');
+            return recipiets;
+        }
+    }
     // User: {
     //     privateConvos: async (parent) => {
     //         const user = await User.findById(parent.privateConvos);
