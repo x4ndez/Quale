@@ -7,6 +7,10 @@ body {
 
 }
 
+h1, h2, h3 {
+    letter-spacing: 0.5rem;
+}
+
 main {
 
     width: 100vw;
@@ -135,4 +139,40 @@ section {
 
 .valid {
     background-color: rgb(255, 255, 255);
+}
+
+input[type=text],
+input[type=password] {
+
+    display: block;
+    padding: 0.5rem;
+    width: 10rem;
+    height: 1.5rem;
+    border-radius: 0.5rem;
+    border-style: none;
+    padding: 0.5rem;
+    margin: 0.5rem;
+
+}
+
+input[type=submit] {
+    display: block;
+    background-color: grey;
+    padding: 0.5rem;
+    width: 10rem;
+    height: 2rem;
+    border-radius: 0.5rem;
+    border-style: none;
+    padding: 0.5rem;
+    margin: 0.5rem;
+    cursor: pointer;
+
+    transition: background-color 0.5s, width 0.5s, letter-spacing 0.5s;
+
+}
+
+input[type=submit]:hover {
+    background-color: rgb(188, 255, 73);
+    width: 12rem;
+    letter-spacing: 1rem;
 }
