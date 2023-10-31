@@ -7,6 +7,7 @@ function Signup(props) {
 
     const navigate = useNavigate();
 
+    const [passwordReveal, setPasswordReveal] = useState(false);
     const [usernameVal, setUsernameVal] = useState('');
     const [passwordVal, setPasswordVal] = useState('');
     const [emailVal, setEmailVal] = useState('');
@@ -133,7 +134,8 @@ function Signup(props) {
             <form onSubmit={handleFormSubmit}>
 
                 <label htmlFor='username'>Username:</label>
-                <input name='username'
+                <input type='text'
+                    name='username'
                     onChange={handleFormInput}
                     value={usernameVal}
                     onBlur={handleFocusOff}
@@ -144,7 +146,8 @@ function Signup(props) {
                 {usernameErr.err}
 
                 <label htmlFor='email'>Email:</label>
-                <input name='email'
+                <input type='text'
+                    name='email'
                     onChange={handleFormInput}
                     value={emailVal}
                     onBlur={handleFocusOff}
@@ -154,13 +157,20 @@ function Signup(props) {
                 {emailErr.err}
 
                 <label htmlFor='password'>Password:</label>
-                <input type="password"
-                    name='password'
-                    onChange={handleFormInput}
-                    onBlur={handleFocusOff}
-                    value={passwordVal}
-                    className={passwordErr.code === 0 || passwordErr.code === 2 ? 'valid' : 'invalid'} />
-
+                <div id='password-container'>
+                    <div id='reveal' onClick={() => {
+                        if (passwordReveal) setPasswordReveal(false)
+                        if(!passwordReveal) setPasswordReveal(true);
+                    }
+                    }></div>
+                    <input type={passwordReveal ? 'text' : 'password'}
+                        name='password'
+                        onChange={handleFormInput}
+                        onBlur={handleFocusOff}
+                        value={passwordVal}
+                        className={passwordErr.code === 0 || passwordErr.code === 2 ? 'valid' : 'invalid'}
+                    />
+                </div>
                 {passwordErr.err}
 
                 <input type='submit' value='Submit' />
