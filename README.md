@@ -12,11 +12,10 @@ Username: xxx
 Password: xxx
 
 TODO:
-STYLING  - tue
-ON SIGN ON STATES mon night or tuesday night
+STYLING  - tue / wed
+ON SIGN ON STATES tue
 FORUM - FRIENDS ONLY now
-BUG FIXES - mon night
-HEROKU - mon night
-PASSWORD HASHING
-PRESENTATION & DOCUMENTATION - tuesday night
+
+PASSWORD HASHING- wednesday
+PRESENTATION & DOCUMENTATION - wednesday
 IF TIME: AVATAR

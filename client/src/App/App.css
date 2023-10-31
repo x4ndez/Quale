@@ -72,7 +72,8 @@ section {
 }
 
 .friend-image {
-    background-color: red;
+    background-image: url('../assets/images/tom400x400.jpg');
+    background-size: cover;
     min-width: 4rem;
     min-height: 4rem;
     border-radius: 0.4rem;
