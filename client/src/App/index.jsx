@@ -42,25 +42,25 @@ function App() {
   const [modalActive, setModalActive] = useState(false);
   const [modalContent, setModalContent] = useState({ type: '', feedback: {} });
 
-  
+
 
   return (
 
     <ApolloProvider client={client}>
 
-      <Modal
-        modalActive={modalActive}
-        setModalActive={setModalActive}
-        modalContent={modalContent}
-        setModalContent={setModalContent}
-      />
+        <Modal
+          modalActive={modalActive}
+          setModalActive={setModalActive}
+          modalContent={modalContent}
+          setModalContent={setModalContent}
+        />
 
-      <Header
-        modalActive={modalActive}
-        setModalActive={setModalActive}
-        modalContent={modalContent}
-        setModalContent={setModalContent}
-      />
+        <Header
+          modalActive={modalActive}
+          setModalActive={setModalActive}
+          modalContent={modalContent}
+          setModalContent={setModalContent}
+        />
 
         <Outlet
           context={
