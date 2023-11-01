@@ -7,7 +7,7 @@ import Auth from '../../../../utils/auth'
 function Login(props) {
 
     const [usernameVal, setUsernameVal] = useState('');
-    const [passwordVal, setPasswordVal] = useState('');
+    const [passwordVal, setPasswordVal] = useState('xandeiscool');
 
     const [login, { data, loading, error }] = useMutation(LOGIN);
 
@@ -70,23 +70,36 @@ function Login(props) {
     return (
         <>
 
-            <form onSubmit={handleFormSubmit}>
 
-                <label htmlFor='username'>Username:</label>
-                <input name='username'
-                    onChange={handleFormInput}
-                    value={usernameVal}
-                    placeholder="xandeisop" />
+            <div className='form-container'>
 
-                <label htmlFor='password'>Password:</label>
-                <input type="password"
-                    name='password'
-                    onChange={handleFormInput}
-                    value={passwordVal} />
+                <h2>LOGIN</h2>
 
-                <input type='submit' value='Submit' />
+                <div className='form-box'>
 
-            </form>
+                    <form onSubmit={handleFormSubmit}>
+
+                        <label htmlFor='username'>Username:</label>
+                        <input  type='text'
+                        name='username'
+                            onChange={handleFormInput}
+                            value={usernameVal}
+                            placeholder="xandeisop" />
+
+                        <label htmlFor='password'>Password:</label>
+                        <input type="password"
+                            name='password'
+                            onChange={handleFormInput}
+                            value={passwordVal}
+                             />
+
+                        <input type='submit' value='Submit' />
+
+                    </form>
+
+                </div>
+
+            </div>
 
         </>
     )

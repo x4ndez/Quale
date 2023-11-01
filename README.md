@@ -8,14 +8,21 @@ When entering a private convo (maybe also public?) and there's no comments to pu
 Not a visual bug yet:  Need to make the account/about page not a table; as react seems to have issues with table elements as I have it now.
 
 IF too many emails have been sent, Outlook will bar emails from sending for a period.  I can't control this.  If there are issues activating the account, it is for this reason.  Normal behaviour can be seen in the walkthrough video provided.  You can use these pre-made credentials:
-Username: xxx
-Password: xxx
+Username: ananfro
+Password: ananfro123
 
 TODO:
 STYLING  - tue / wed
-ON SIGN ON STATES tue
-FORUM - FRIENDS ONLY now
 
 PASSWORD HASHING- wednesday
 PRESENTATION & DOCUMENTATION - wednesday
-IF TIME: AVATAR
+
+What would I change if I was to do it again?
+I would use context and reducers for my modal useStates as currently I'm just passing these props through my whole application.
+A lot of my bugs are likely due to the way React rerenders, so I would store more values in useStates
+
+Extra features for future?
+Avatars that a user can upload to if I can integrate with an FTP server.
+Friend requests instead of instantly adding someone
+2001 Style Forum where posts are visible by friends
+Admin & User priviliges so admins can force ban users, posts, etc.
