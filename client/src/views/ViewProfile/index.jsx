@@ -40,17 +40,17 @@ function ViewProfile() {
                             <tbody>
                                 <tr>
                                     <td>Name</td>
-                                    <td>{data.userById.info.name}</td>
+                                    <td className='user-data'>{data.userById.info.name}</td>
 
                                     <td>Phone</td>
-                                    <td>{data.userById.info.phone}</td>
+                                    <td className='user-data'>{data.userById.info.phone}</td>
                                 </tr>
                                 <tr>
                                     <td>City</td>
-                                    <td>{data.userById.info.city}</td>
+                                    <td className='user-data'>{data.userById.info.city}</td>
 
                                     <td>Country</td>
-                                    <td>{data.userById.info.country}</td>
+                                    <td className='user-data'>{data.userById.info.country}</td>
                                 </tr>
                             </tbody>
 

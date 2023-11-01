@@ -89,7 +89,7 @@ function ViewAccount() {
                                         )
                                         : (
 
-                                            <td>{abName}</td>
+                                            <td className='user-data'>{abName}</td>
 
                                         )}
 
@@ -100,7 +100,7 @@ function ViewAccount() {
                                         </>)
                                         : (
 
-                                            <td>{abPhone}</td>
+                                            <td className='user-data'>{abPhone}</td>
 
                                         )}
 
@@ -115,7 +115,7 @@ function ViewAccount() {
                                         )
                                         : (
 
-                                            <td>{abCity}</td>
+                                            <td className='user-data'>{abCity}</td>
 
                                         )}
 
@@ -126,7 +126,7 @@ function ViewAccount() {
                                         )
                                         : (
 
-                                            <td>{abCountry}</td>
+                                            <td className='user-data'>{abCountry}</td>
 
                                         )}
 

@@ -33,6 +33,15 @@ main {
 
 }
 
+td {
+    background-color: rgba(255, 255, 255, 0.066);
+    padding: 1rem;
+}
+
+.user-data {
+    width: 10rem;
+}
+
 section {
     float: right;
 }
