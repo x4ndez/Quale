@@ -31,7 +31,7 @@ function ViewDashboard(props) {
     return (
         <>
             <main className='flex-center-h'>
-                
+
                 {isLoggedIn ? (
 
                     <div id='main-container'>
@@ -50,8 +50,8 @@ function ViewDashboard(props) {
 
                             <div>Recent Convos:</div>
 
-                            {recentConvos ? recentConvos.convosRecent.map((convo) =>
-                            (<ChatPreview key={convo._id}
+                            {recentConvos ? recentConvos.convosRecent.map((convo, i) =>
+                            (<ChatPreview key={i}
                                 convoData={convo}
                                 setModalActive={setModalActive}
                                 setModalContent={setModalContent} />)

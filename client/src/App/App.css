@@ -19,15 +19,17 @@ main {
     width: 100vw;
     min-height: 100vh;
 
-    /* background-color: grey; */
+    background-color: grey;
 
 }
 
 #main-container {
 
     width: 70%;
+    padding: 2rem;
+    color: white;
 
-    background-color: yellow;
+    background-color: rgb(36, 36, 36);
 
 }
 
@@ -40,8 +42,11 @@ aside {
     width: 30%;
     position: relative;
     display: inline-block;
+    padding: 2rem;
+    box-sizing: border-box;
+    border-radius: 1rem;
 
-    background-color: green;
+    background-color: white;
 
 }
 
@@ -52,19 +57,19 @@ aside {
     border-radius: 1rem;
 
     color: white;
-    background-color: darkslateblue;
+    background-color: rgba(0, 0, 0, 0.5);
 
 }
 
 section {
     width: 70%;
-    background-color: blue;
+    /* background-color: blue; */
 }
 
 .friends-container {
-    background-color: pink;
+    /* background-color: pink; */
 
-    padding: 0.5rem;
+    padding: 1rem;
     box-sizing: border-box;
     display: flex;
     justify-content: flex-start;
@@ -75,7 +80,7 @@ section {
 
 
     width: 100%;
-    height: 5rem;
+    height: 7rem;
 }
 
 .friend-image {
@@ -156,7 +161,7 @@ input[type=password] {
     padding: 0.5rem;
     margin: 1rem;
     border-width: 1px;
-    border-color: rgba(0,0,0,0.2);
+    border-color: rgba(0, 0, 0, 0.2);
 
 }
 

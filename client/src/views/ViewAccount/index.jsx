@@ -74,82 +74,83 @@ function ViewAccount() {
 
                         <h1>{data.userById.username}</h1>
 
-                        <h2>About <button onClick={() => setEditAbout(true)}>Edit</button></h2>
+                        <span className='friend-image-main'></span>
+
+                        <h2>A   bout <button onClick={() => setEditAbout(true)}>Edit</button></h2>
                         <table>
+                            <thead></thead>
+                            <tbody>
+                                <tr>
 
-                            <tr>
+                                    <td>Name</td>
+                                    {editAbout
+                                        ? (
+                                            <input type='text' name='abName' value={abName} onChange={handleInput} />
+                                        )
+                                        : (
 
-                                <td>Name</td>
+                                            <td>{abName}</td>
+
+                                        )}
+
+                                    <td>Phone</td>
+                                    {editAbout
+                                        ? (<>
+                                            <input type='text' name='abPhone' value={abPhone} onChange={handleInput} />
+                                        </>)
+                                        : (
+
+                                            <td>{abPhone}</td>
+
+                                        )}
+
+                                </tr>
+
+                                <tr>
+
+                                    <td>City</td>
+                                    {editAbout
+                                        ? (
+                                            <input type='text' name='abCity' value={abCity} onChange={handleInput} />
+                                        )
+                                        : (
+
+                                            <td>{abCity}</td>
+
+                                        )}
+
+                                    <td>Country</td>
+                                    {editAbout
+                                        ? (
+                                            <input type='text' name='abCountry' value={abCountry} onChange={handleInput} />
+                                        )
+                                        : (
+
+                                            <td>{abCountry}</td>
+
+                                        )}
+
+                                </tr>
+
                                 {editAbout
+                                    // SUBMIT TO DB
+                                    // $id: ID!, $name: String!, $phone: String!, $city: String!, $country: String!
                                     ? (
-                                        <input type='text' name='abName' value={abName} onChange={handleInput} />
+                                        <button onClick={() => {
+                                            updateInfo({
+                                                variables: {
+                                                    userId: data.userById._id,
+                                                    name: abName,
+                                                    phone: abPhone,
+                                                    city: abCity,
+                                                    country: abCountry,
+                                                }
+                                            });
+                                            setEditAbout(false);
+                                        }}>😊</button>
                                     )
-                                    : (
-
-                                        <td>{abName}</td>
-
-                                    )}
-
-                                <td>Phone</td>
-                                {editAbout
-                                    ? (<>
-                                        <input type='text' name='abPhone' value={abPhone} onChange={handleInput} />
-                                    </>)
-                                    : (
-
-                                        <td>{abPhone}</td>
-
-                                    )}
-
-                            </tr>
-
-                            <tr>
-
-                                <td>City</td>
-                                {editAbout
-                                    ? (
-                                        <input type='text' name='abCity' value={abCity} onChange={handleInput} />
-                                    )
-                                    : (
-
-                                        <td>{abCity}</td>
-
-                                    )}
-
-                                <td>Country</td>
-                                {editAbout
-                                    ? (
-                                        <input type='text' name='abCountry' value={abCountry} onChange={handleInput} />
-                                    )
-                                    : (
-
-                                        <td>{abCountry}</td>
-
-                                    )}
-
-                            </tr>
-
-                            {editAbout
-                                // SUBMIT TO DB
-                                // $id: ID!, $name: String!, $phone: String!, $city: String!, $country: String!
-                                ? (
-                                    <button onClick={() => {
-                                        updateInfo({
-                                            variables: {
-                                                userId: data.userById._id,
-                                                name: abName,
-                                                phone: abPhone,
-                                                city: abCity,
-                                                country: abCountry,
-                                            }
-                                        });
-                                        setEditAbout(false);
-                                    }}>😊</button>
-                                )
-                                : ('')}
-
-
-
+                                    : ('')}
+                            </tbody>
                         </table >
 
                         <h2>Interests <button onClick={() => setIntEdit(true)}>+</button></h2>
