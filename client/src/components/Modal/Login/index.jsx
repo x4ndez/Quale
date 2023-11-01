@@ -93,7 +93,7 @@ function Login(props) {
                             value={passwordVal}
                              />
 
-                        <input type='submit' value='Submit' />
+                        <input type='submit' value='SUBMIT' />
 
                     </form>
 

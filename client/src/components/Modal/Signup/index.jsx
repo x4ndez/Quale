@@ -180,7 +180,7 @@ function Signup(props) {
 
                         <p className='input-err'>{passwordErr.err}</p>
 
-                        <input type='submit' value='Submit' />
+                        <input type='submit' value='SUBMIT' />
 
                         {signupErr.err}
 
