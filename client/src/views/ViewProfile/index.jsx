@@ -25,56 +25,65 @@ function ViewProfile() {
         // <></>
         <>
 
-            {data ? (
+            <main className='flex-center-h'>
 
-                <div id='main-container'>
+                {data ? (
 
-                    <h1>{data.userById.username}</h1>
+                    <div id='main-container'>
 
-                    <h2>About</h2>
-                    <table>
+                        <h1>{data.userById.username}</h1>
 
-                        <tr>
-                            <td>Name</td>
-                            <td>{data.userById.info.name}</td>
+                        <h2>About</h2>
 
-                            <td>Phone</td>
-                            <td>{data.userById.info.phone}</td>
-                        </tr>
-                        <tr>
-                            <td>City</td>
-                            <td>{data.userById.info.city}</td>
+                        <table>
+                            <thead></thead>
+                            <tbody>
+                                <tr>
+                                    <td>Name</td>
+                                    <td className='user-data'>{data.userById.info.name}</td>
 
-                            <td>Country</td>
-                            <td>{data.userById.info.country}</td>
-                        </tr>
+                                    <td>Phone</td>
+                                    <td className='user-data'>{data.userById.info.phone}</td>
+                                </tr>
+                                <tr>
+                                    <td>City</td>
+                                    <td className='user-data'>{data.userById.info.city}</td>
 
-                    </table >
+                                    <td>Country</td>
+                                    <td className='user-data'>{data.userById.info.country}</td>
+                                </tr>
+                            </tbody>
 
-                    <h2>Interests</h2>
+                        </table >
 
-                    {data.userById.interests.length
-                        ?
-                        data.userById.interests.map((interest, i) =>
-                        (<ul
-                            key={i}
-                            className='interest'>
+                        <h2>Interests</h2>
 
-                            <span>{interest}</span>
+                        {data.userById.interests.length
+                            ?
+                            data.userById.interests.map((interest, i) =>
+                            (<ul
+                                key={i}
+                                className='interest'>
 
-                        </ul>)
-                        )
-                        : 'This person has no interests.'
-                    }
+                                <span>{interest}</span>
+
+                            </ul>)
+                            )
+                            : 'This person has no interests.'
+                        }
 
 
 
-                </div >
+                    </div >
 
-            ) : 'Loading...'}
+                ) : 'Loading...'}
+
+            </main>
+
         </>
 
     )
+
 }
 
 export default ViewProfile;

@@ -7,6 +7,7 @@ function Signup(props) {
 
     const navigate = useNavigate();
 
+    const [passwordReveal, setPasswordReveal] = useState(false);
     const [usernameVal, setUsernameVal] = useState('');
     const [passwordVal, setPasswordVal] = useState('');
     const [emailVal, setEmailVal] = useState('');
@@ -130,44 +131,64 @@ function Signup(props) {
     return (
         <>
 
-            <form onSubmit={handleFormSubmit}>
+            <div className='form-container'>
 
-                <label htmlFor='username'>Username:</label>
-                <input name='username'
-                    onChange={handleFormInput}
-                    value={usernameVal}
-                    onBlur={handleFocusOff}
-                    placeholder="xandeisop"
-                    className={usernameErr.code === 0 || usernameErr.code === 2 ? 'valid' : 'invalid'} />
+                <h2>REGISTER</h2>
+
+                <div className='form-box'>
+
+                    <form onSubmit={handleFormSubmit}>
+
+                        <label htmlFor='username'>Username:</label>
+                        <input type='text'
+                            name='username'
+                            onChange={handleFormInput}
+                            value={usernameVal}
+                            onBlur={handleFocusOff}
+                            placeholder="xandeisop"
+                            className={usernameErr.code === 0 || usernameErr.code === 2 ? 'valid' : 'invalid'} />
 
 
-                {usernameErr.err}
+                        <p className='input-err'>{usernameErr.err}</p>
 
-                <label htmlFor='email'>Email:</label>
-                <input name='email'
-                    onChange={handleFormInput}
-                    value={emailVal}
-                    onBlur={handleFocusOff}
-                    placeholder="xande@xandedev.com"
-                    className={emailErr.code === 0 || emailErr.code === 2 ? 'valid' : 'invalid'} />
+                        <label htmlFor='email'>Email:</label>
+                        <input type='text'
+                            name='email'
+                            onChange={handleFormInput}
+                            value={emailVal}
+                            onBlur={handleFocusOff}
+                            placeholder="xande@xandedev.com"
+                            className={emailErr.code === 0 || emailErr.code === 2 ? 'valid' : 'invalid'} />
 
-                {emailErr.err}
+                        <p className='input-err'>{emailErr.err}</p>
 
-                <label htmlFor='password'>Password:</label>
-                <input type="password"
-                    name='password'
-                    onChange={handleFormInput}
-                    onBlur={handleFocusOff}
-                    value={passwordVal}
-                    className={passwordErr.code === 0 || passwordErr.code === 2 ? 'valid' : 'invalid'} />
+                        <label htmlFor='password'>Password:</label>
+                        <div id='password-container'>
+                            <div id='reveal' onClick={() => {
+                                if (passwordReveal) setPasswordReveal(false)
+                                if (!passwordReveal) setPasswordReveal(true);
+                            }
+                            }></div>
+                            <input type={passwordReveal ? 'text' : 'password'}
+                                name='password'
+                                onChange={handleFormInput}
+                                onBlur={handleFocusOff}
+                                value={passwordVal}
+                                className={passwordErr.code === 0 || passwordErr.code === 2 ? 'valid' : 'invalid'}
+                            />
+                        </div>
 
-                {passwordErr.err}
+                        <p className='input-err'>{passwordErr.err}</p>
 
-                <input type='submit' value='Submit' />
+                        <input type='submit' value='SUBMIT' />
 
-                {signupErr.err}
+                        {signupErr.err}
 
-            </form>
+                    </form>
+
+                </div>
+
+            </div>
 
         </>
     )

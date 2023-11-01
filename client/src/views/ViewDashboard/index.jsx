@@ -30,47 +30,48 @@ function ViewDashboard(props) {
 
     return (
         <>
+            <main className='flex-center-h'>
 
-            {isLoggedIn ? (
+                {isLoggedIn ? (
 
-                <div id='main-container'>
+                    <div id='main-container'>
 
-                    <aside>
+                        <aside>
 
-                        <div
-                            id="btn-createroom"
-                            className='aside-box clickable'
-                            onClick={() => {
-                                setModalActive(true);
-                                setModalContent({ type: 'CreateRoom' });
-                            }}>
-                            Create Room
-                        </div>
+                            <div
+                                id="btn-createroom"
+                                className='aside-box clickable'
+                                onClick={() => {
+                                    setModalActive(true);
+                                    setModalContent({ type: 'CreateRoom' });
+                                }}>
+                                Create Room
+                            </div>
 
-                        <div>Recent Convos:</div>
+                            <div>Recent Convos:</div>
 
-                        {recentConvos ? recentConvos.convosRecent.map((convo) =>
-                        (<ChatPreview key={convo._id}
-                            convoData={convo}
-                            setModalActive={setModalActive}
-                            setModalContent={setModalContent} />)
-                        ) : 'Loading...'}
+                            {recentConvos ? recentConvos.convosRecent.map((convo, i) =>
+                            (<ChatPreview key={i}
+                                convoData={convo}
+                                setModalActive={setModalActive}
+                                setModalContent={setModalContent} />)
+                            ) : 'Loading...'}
 
-                        <div className='aside-box clickable'>Show All Rooms</div>
+                            <div className='aside-box clickable'>Show All Rooms</div>
 
-                    </aside>
+                        </aside>
 
-                    <section>
+                        <section>
 
-                        <FriendsDisplay />
+                            <FriendsDisplay />
 
-                    </section>
+                        </section>
 
-                </div>
+                    </div>
 
 
-            ) : ('not logged in')}
-
+                ) : ('not logged in')}
+            </main>
 
         </>
     )

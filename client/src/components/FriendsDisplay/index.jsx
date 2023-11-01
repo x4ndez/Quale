@@ -28,8 +28,8 @@ function FriendsDisplay(props) {
 
                 {data
                     ? (data.userById.friends.length
-                        ? (data.userById.friends.map((friend) =>
-                        (<div
+                        ? (data.userById.friends.map((friend, i) =>
+                        (<div key={i}
                             className='friend-image clickable'
                             onClick={() => navigate(`/profile/${friend._id}`)}>{friend.username}</div>)
                         )) : 'No friends lol.'

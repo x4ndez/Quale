@@ -1,0 +1,47 @@
+.index-container {
+
+    scroll-behavior: smooth;
+    scroll-snap-type: y mandatory;
+    width: 200vw;
+    height: 200vh;
+
+    display: flex;
+    flex-direction: column;
+
+}
+
+.index-slides {
+
+    width: 100vw;
+    height: 100vh;
+    color: white;
+
+    display: flex;
+
+
+
+}
+
+.index-slide-01 {
+
+    background-image: url('../../assets/images/index-bg.jpeg');
+    background-size: cover;
+    background-position: 70%;
+    justify-content: flex-start;
+    align-items: flex-start;
+    padding-left: 5rem;
+    flex-direction: column;
+
+}
+
+.index-slide-02 {
+
+    background-color: slategray;
+    justify-content: center;
+    align-items: center;
+}
+
+.index-container h1 {
+    font-size: 5rem;
+
+}
