@@ -3,7 +3,11 @@
 ![Screenshot of application](./assets/screenshot.png)
 
 ## Description
--
+You may have heard of Instagram, maybe Facebook, or maybe you've heard of Twitter before Elon invested his pocket change into making it X.  But what you don't know is, he only invested his pocket change into Twitter because he saw bigger and better things...
+
+Quale. A social network for you, your mum and your 3 cats.  By the end of the week I hope you think about moving your entire life to Quale, where I promise I won't be harvesting your data and selling it to your internet overlords ;)
+
+Fun Fact! Qual e` means 'what's up?' in Brazilian Portuguese!
 
 ## Table of Contents
 
