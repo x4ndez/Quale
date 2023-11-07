@@ -105,12 +105,12 @@ const userSchema = new Schema(
 );
 
 // Virtual to hold the friend request count
-User.virtuals('requestCount').get(() => {
+userSchema.virtual('requestCount').get(() => {
     return friendRequests.length;
 });
 
 // Virtual to hold the friend count
-User.virtuals('friendsCount').get(() => {
+userSchema.virtual('friendsCount').get(() => {
     return friends.length;
 });
 
