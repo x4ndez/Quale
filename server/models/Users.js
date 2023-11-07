@@ -100,19 +100,38 @@ const userSchema = new Schema(
             virtuals: true,
             getters: true,
         },
+        // toObject: { virtuals: true, },
+
+        virtuals: {
+
+            friendsCount: {
+                get: function () {
+                    return this.friends.length;
+                },
+            },
+            friendsRequestCount: {
+                get: function () {
+                    return this.friendRequests.length;
+                },
+            }
+
+
+        },
+
+
 
     }
 );
 
 // Virtual to hold the friend request count
-userSchema.virtual('requestCount').get(() => {
-    return friendRequests.length;
-});
+// userSchema.virtual('requestCount').get(() => {
+//     return this.friendRequests.length;
+// });
 
 // Virtual to hold the friend count
-userSchema.virtual('friendsCount').get(() => {
-    return friends.length;
-});
+// userSchema.virtual('friendsCount').get(function () {
+//     return 1;
+// });
 
 const User = model("user", userSchema);
 

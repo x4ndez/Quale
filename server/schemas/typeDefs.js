@@ -41,12 +41,15 @@ type User {
     password: String
     email: String
     friends: [User]
+    friendRequests: [User]
     convos: [Convo]
     info: Info
     interests: [String]
     privateConvos: [ConvoIndicator]
     activateCode: String
     accountActivated: Boolean
+    friendsCount: Int
+    friendRequestsCount: Int
 }
 
 type ConvoIndicator {
