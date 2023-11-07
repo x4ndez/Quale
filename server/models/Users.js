@@ -33,6 +33,12 @@ const userSchema = new Schema(
                 ref: 'user',
             },
         ],
+        friendRequests: [
+            {
+                type: Schema.Types.ObjectId,
+                ref: 'user',
+            },
+        ],
         convos: [
             {
                 type: Schema.Types.ObjectId,
@@ -97,6 +103,16 @@ const userSchema = new Schema(
 
     }
 );
+
+// Virtual to hold the friend request count
+User.virtuals('requestCount').get(() => {
+    return friendRequests.length;
+});
+
+// Virtual to hold the friend count
+User.virtuals('friendsCount').get(() => {
+    return friends.length;
+});
 
 const User = model("user", userSchema);
 
