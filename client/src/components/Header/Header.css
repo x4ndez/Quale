@@ -94,3 +94,24 @@ nav:hover {
     cursor: pointer;
     transform: scale(0.8);
 }
+
+.friendRequests {
+
+    width: 1rem;
+    height: 1rem;
+    border-radius: 0.3rem;
+    background-color: aqua;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    transition: height 0.5s, width 0.5s;
+
+}
+
+.friendRequests:hover {
+
+    width: 1.2rem;
+    height: 1.2rem;
+
+}
