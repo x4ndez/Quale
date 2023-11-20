@@ -1,12 +1,12 @@
 import { useState, useEffect } from 'react'
 import { useQuery, useMutation } from '@apollo/client'
-import { GET_USER_INFO } from '../../../utils/graphql/queries';
+import { GET_USER_DATA } from '../../../utils/graphql/queries';
 import Auth from '../../../utils/auth'
 import { useNavigate, useParams } from 'react-router-dom';
 
 function ViewFriends() {
 
-    const { data: userData } = useQuery(GET_USER_INFO, {
+    const { data: userData } = useQuery(GET_USER_DATA, {
         variables: {
             userId: Auth.getProfile().data._id,
         }
@@ -21,7 +21,17 @@ function ViewFriends() {
 
     return (
         <>
-            Friends
+            <h1>Friend Requests:</h1>
+            {userData
+                ? (
+                    userData.userById.friendRequests.map((user) =>
+                    (
+                        <div>{user.username}</div>
+                    ))
+                )
+                : 'Loading...'}
+
+
         </>
     )
 }

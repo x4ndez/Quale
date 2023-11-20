@@ -14,8 +14,7 @@ const resolvers = {
             return x;
         },
         userById: async (parent, { userId }) => {
-            const y = await User.findById(userId);
-            console.log(y);
+            const y = await User.findById(userId).populate('friendRequests');
             return y;
         },
         // return 5 most recent conversations: Used for the dashboard recent convos display.
@@ -346,10 +345,11 @@ const resolvers = {
             const recipiets = await PrivateConvo.findById(parent._id).populate('recipients');
             return recipiets;
         }
-    }
+    },
     // User: {
-    //     privateConvos: async (parent) => {
-    //         const user = await User.findById(parent.privateConvos);
+    //     friendRequests: async (parent) => {
+    //         // console.log(parent);
+    //         const user = await User.findById(parent);
     //         return user;
     //     }
     // }
