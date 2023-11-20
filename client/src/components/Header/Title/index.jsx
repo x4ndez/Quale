@@ -22,7 +22,11 @@ function Title(props) {
                     <span className='nav-right'>
                         {authData ? (<>
 
-                            <div className='friendRequests'>{authData.data.friendsRequestsCount > 0 ? friendsRequestsCount : '0'}</div>
+                            <div
+                                onClick={() => navigate(`/friends`)}
+                                className='friendRequests'>
+                                {authData.data.friendsRequestsCount > 0 ? friendsRequestsCount : '0'}
+                            </div>
 
                             <div className='title-link'
                                 onClick={() => navigate(`/profile/${authData.data._id}`)}>{authData.data.username}</div>

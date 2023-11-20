@@ -17,7 +17,7 @@ query Query($userId: ID!) {
 `;
 
 export const GET_USER_DATA = gql`
-query Query($userId: ID!) {
+query UserById($userId: ID!) {
   userById(userId: $userId) {
     _id
     username
@@ -26,13 +26,21 @@ query Query($userId: ID!) {
       _id
       username
     }
+    friendRequests {
+      _id
+      username
+    }
     convos {
       _id
       roomName
     }
+    friendsCount
+    friendRequestsCount
   }
 }
 `;
+
+
 
 export const GET_RECENT_CONVOS = gql`
 query convosRecent {

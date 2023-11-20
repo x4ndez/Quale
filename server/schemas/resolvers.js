@@ -8,7 +8,10 @@ const resolvers = {
     Query: {
         // return all users
         users: async () => {
-            return await User.find().populate('convos');
+            
+            const x = await User.find().populate('convos');
+            console.log(x);
+            return x;
         },
         userById: async (parent, { userId }) => {
             return await User.findById(userId);
@@ -155,7 +158,7 @@ const resolvers = {
         addFriend: async (parent, { userId, friendId }) => {
 
             return await User.findByIdAndUpdate(userId, {
-                $addToSet: { friends: friendId }
+                $addToSet: { friend: friendId }
             }, {
                 returnDocument: 'after',
             });
@@ -166,6 +169,16 @@ const resolvers = {
 
             return await User.findByIdAndUpdate(userId, {
                 $pull: { friends: friendId },
+            }, {
+                returnDocument: 'after',
+            });
+
+        },
+
+        addFriendRequest: async (parent, { userId, friendId }) => {
+
+            return await User.findByIdAndUpdate(userId, {
+                $addToSet: { friendRequests: friendId }
             }, {
                 returnDocument: 'after',
             });

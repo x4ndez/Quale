@@ -10,6 +10,7 @@ import ViewError from "./views/ViewError"
 import ViewAccount from "./views/ViewAccount"
 import ViewProfile from './views/ViewProfile'
 import ViewActivateAccount from './views/ViewActivateAccount'
+import ViewFriends from './views/ViewFriends'
 
 const router = createBrowserRouter([
   {
@@ -36,6 +37,10 @@ const router = createBrowserRouter([
       {
         path: '/activate/:userId',
         element: <ViewActivateAccount />,
+      },
+      {
+        path: '/friends',
+        element: <ViewFriends />,
       },
     ],
   }
