@@ -35,7 +35,7 @@ query UserById($userId: ID!) {
       roomName
     }
     friendsCount
-    friendRequestsCount
+    friendsRequestCount
   }
 }
 `;

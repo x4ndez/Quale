@@ -8,13 +8,15 @@ const resolvers = {
     Query: {
         // return all users
         users: async () => {
-            
+
             const x = await User.find().populate('convos');
             console.log(x);
             return x;
         },
         userById: async (parent, { userId }) => {
-            return await User.findById(userId);
+            const y = await User.findById(userId);
+            console.log(y);
+            return y;
         },
         // return 5 most recent conversations: Used for the dashboard recent convos display.
         convosRecent: async () => {

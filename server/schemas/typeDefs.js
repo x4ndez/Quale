@@ -50,7 +50,7 @@ type User {
     activateCode: String
     accountActivated: Boolean
     friendsCount: Int
-    friendRequestsCount: Int
+    friendsRequestCount: Int
 }
 
 type ConvoIndicator {

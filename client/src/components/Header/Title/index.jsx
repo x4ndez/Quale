@@ -1,16 +1,31 @@
 import { Link, useNavigate } from 'react-router-dom'
 import { useState, useEffect } from 'react'
+import { useQuery } from '@apollo/client';
+import { GET_USER_DATA } from '../../../../utils/graphql/queries';
 import Auth from '../../../../utils/auth'
 
 function Title(props) {
 
     const navigate = useNavigate();
 
+    const { data: userData } = useQuery(GET_USER_DATA, {
+        variables: {
+            userId: Auth.getProfile().data._id,
+        }
+    });
+
     const [authData, setAuthData] = useState(Auth.getProfile())
 
     useEffect(() => {
         setAuthData(Auth.getProfile());
     }, [props.modalContent]);
+
+    useEffect(() => {
+        if (!userData) return;
+
+        console.log(userData.userById.friendsRequestCount);
+
+    }, [userData]);
 
     return (
         <>
@@ -20,16 +35,16 @@ function Title(props) {
 
                     <span className='nav-left'>Quale</span>
                     <span className='nav-right'>
-                        {authData ? (<>
+                        {userData ? (<>
 
                             <div
                                 onClick={() => navigate(`/friends`)}
                                 className='friendRequests'>
-                                {authData.data.friendsRequestsCount > 0 ? friendsRequestsCount : '0'}
+                                {userData.userById.friendsRequestCount > 0 ? userData.userById.friendsRequestCount : '0'}
                             </div>
 
                             <div className='title-link'
-                                onClick={() => navigate(`/profile/${authData.data._id}`)}>{authData.data.username}</div>
+                                onClick={() => navigate(`/profile/${userData.userById._id}`)}>{userData.userById.username}</div>
                             <button onClick={() => {
                                 navigate('/');
                                 Auth.logout();

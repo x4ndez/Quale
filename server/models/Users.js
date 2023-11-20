@@ -111,7 +111,8 @@ const userSchema = new Schema(
             },
             friendsRequestCount: {
                 get: function () {
-                    return this.friendRequests.length;
+                    const reqCount = this.friendRequests.length;
+                    return reqCount;
                 },
             }
 
