@@ -18,6 +18,7 @@ type Mutation {
     addFriend(userId: ID!, friendId: ID!): User
     removeFriend(userId: ID!, friendId: ID!): User
     addFriendRequest(userId: ID!, friendId: ID!): User
+    removeFriendRequest(userId: ID!, friendId: ID!): User
     startPrivateConvo(userId: ID!, friendId: ID!): PrivateConvo
     checkForPrivateConvo(userId: ID!, friendId: ID!): ID
     initiatePrivateConvo(userId: ID!, friendId: ID!): PrivateConvo

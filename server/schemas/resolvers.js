@@ -14,7 +14,9 @@ const resolvers = {
             return x;
         },
         userById: async (parent, { userId }) => {
-            const y = await User.findById(userId).populate('friendRequests');
+            const y = await User.findById(userId)
+                .populate('friendRequests')
+                .populate('friends');
             return y;
         },
         // return 5 most recent conversations: Used for the dashboard recent convos display.
@@ -158,8 +160,20 @@ const resolvers = {
 
         addFriend: async (parent, { userId, friendId }) => {
 
+            await User.findByIdAndUpdate(userId, {
+                $pull: { friendRequests: friendId },
+            }, {
+                returnDocument: 'after',
+            });
+
+            await User.findByIdAndUpdate(friendId, {
+                $addToSet: { friends: userId }
+            }, {
+                returnDocument: 'after',
+            });
+
             return await User.findByIdAndUpdate(userId, {
-                $addToSet: { friend: friendId }
+                $addToSet: { friends: friendId }
             }, {
                 returnDocument: 'after',
             });
@@ -178,8 +192,18 @@ const resolvers = {
 
         addFriendRequest: async (parent, { userId, friendId }) => {
 
+            return await User.findByIdAndUpdate(friendId, {
+                $addToSet: { friendRequests: userId }
+            }, {
+                returnDocument: 'after',
+            });
+
+        },
+
+        removeFriendRequest: async (parent, { userId, friendId }) => {
+
             return await User.findByIdAndUpdate(userId, {
-                $addToSet: { friendRequests: friendId }
+                $pull: { friendRequests: friendId },
             }, {
                 returnDocument: 'after',
             });
