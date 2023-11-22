@@ -108,6 +108,32 @@ export const REMOVE_FRIEND = gql`
   }
   `;
 
+export const ADD_FRIEND_REQUEST = gql`
+mutation Mutation($userId: ID!, $friendId: ID!) {
+  addFriendRequest(userId: $userId, friendId: $friendId) {
+    _id
+    username
+    friendRequests {
+      _id
+      username
+    }
+    friends {
+      _id
+      username
+    }
+  }
+}
+`;
+
+export const REMOVE_FRIEND_REQUEST = gql`
+mutation RemoveFriendRequest($userId: ID!, $friendId: ID!) {
+  removeFriendRequest(userId: $userId, friendId: $friendId) {
+    _id
+    username
+  }
+}
+`;
+
 export const START_PRIVATE_CONVO = gql`
   mutation Mutation($userId: ID!, $friendId: ID!) {
     startPrivateConvo(userId: $userId, friendId: $friendId) {

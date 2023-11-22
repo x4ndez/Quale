@@ -2,7 +2,7 @@ import './UserSelect.css'
 import { useState, useEffect } from 'react'
 import { useQuery, useMutation } from '@apollo/client'
 import Auth from '../../../../../utils/auth'
-import { ADD_FRIEND, REMOVE_FRIEND } from '../../../../../utils/graphql/mutations';
+import { REMOVE_FRIEND, ADD_FRIEND_REQUEST } from '../../../../../utils/graphql/mutations';
 import { GET_USER_DATA } from '../../../../../utils/graphql/queries';
 import { useNavigate } from 'react-router-dom';
 
@@ -10,7 +10,7 @@ function UserSelect(props) {
 
     const navigate = useNavigate();
 
-    const [addFriend] = useMutation(ADD_FRIEND);
+    const [addFriendRequest] = useMutation(ADD_FRIEND_REQUEST);
     const [removeFriend] = useMutation(REMOVE_FRIEND);
     const { data, loading, error } = useQuery(GET_USER_DATA, {
         variables: {
@@ -54,7 +54,7 @@ function UserSelect(props) {
                                 userId: data.userById._id, friendId: commentData.props.createdBy._id,
                             }
                         })}>Remove Friend</ul>)
-                        : (<ul onClick={() => addFriend({
+                        : (<ul onClick={() => addFriendRequest({
                             variables: {
                                 userId: data.userById._id, friendId: commentData.props.createdBy._id,
                             }

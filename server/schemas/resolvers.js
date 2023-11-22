@@ -8,10 +8,16 @@ const resolvers = {
     Query: {
         // return all users
         users: async () => {
-            return await User.find().populate('convos');
+
+            const x = await User.find().populate('convos');
+            console.log(x);
+            return x;
         },
         userById: async (parent, { userId }) => {
-            return await User.findById(userId);
+            const y = await User.findById(userId)
+                .populate('friendRequests')
+                .populate('friends');
+            return y;
         },
         // return 5 most recent conversations: Used for the dashboard recent convos display.
         convosRecent: async () => {
@@ -154,6 +160,18 @@ const resolvers = {
 
         addFriend: async (parent, { userId, friendId }) => {
 
+            await User.findByIdAndUpdate(userId, {
+                $pull: { friendRequests: friendId },
+            }, {
+                returnDocument: 'after',
+            });
+
+            await User.findByIdAndUpdate(friendId, {
+                $addToSet: { friends: userId }
+            }, {
+                returnDocument: 'after',
+            });
+
             return await User.findByIdAndUpdate(userId, {
                 $addToSet: { friends: friendId }
             }, {
@@ -166,6 +184,26 @@ const resolvers = {
 
             return await User.findByIdAndUpdate(userId, {
                 $pull: { friends: friendId },
+            }, {
+                returnDocument: 'after',
+            });
+
+        },
+
+        addFriendRequest: async (parent, { userId, friendId }) => {
+
+            return await User.findByIdAndUpdate(friendId, {
+                $addToSet: { friendRequests: userId }
+            }, {
+                returnDocument: 'after',
+            });
+
+        },
+
+        removeFriendRequest: async (parent, { userId, friendId }) => {
+
+            return await User.findByIdAndUpdate(userId, {
+                $pull: { friendRequests: friendId },
             }, {
                 returnDocument: 'after',
             });
@@ -331,10 +369,11 @@ const resolvers = {
             const recipiets = await PrivateConvo.findById(parent._id).populate('recipients');
             return recipiets;
         }
-    }
+    },
     // User: {
-    //     privateConvos: async (parent) => {
-    //         const user = await User.findById(parent.privateConvos);
+    //     friendRequests: async (parent) => {
+    //         // console.log(parent);
+    //         const user = await User.findById(parent);
     //         return user;
     //     }
     // }
